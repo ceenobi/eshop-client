@@ -1,0 +1,93 @@
+* {
+  font-family: 'Rubik Variable', sans-serif;
+  text-decoration: none !important;
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-weight: 400;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --bg-zinc-700: #3f3f46;
+  --bg-zinc-600: #5f5f69;
+  --bg-gray-100: #ffffff;
+  --bg-yellow-300: #d3b20e;
+  --bg-blue-300: #884d00;
+  --bg-blue-400: #001088;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+main {
+  background-color: var(--bg-gray-100);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit !important;
+}
+
+.profile:hover {
+  color: var(--bg-blue-400) !important;
+  transition: 0.2 ease-in-out !important;
+}
+
+
+.cursor {
+  cursor: pointer;
+}
+
+.remove:hover {
+  text-decoration: underline !important;
+}
+
+.scrollbody {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbody::-webkit-scrollbar {
+  display: none;
+}
+
+.cardBox * {
+  transition: 0.3s ease-in;
+}
+
+.cardBox:hover {
+  transition: 0.3s ease-in;
+  filter: brightness(80%);
+}
+
+.btns {
+  color: black !important;
+  background-color: var(--bg-blue-300) !important;
+}
+
+.btns:hover {
+  background-color: var(--bg-yellow-300) !important;
+  transition: 0.3s ease-in-out;
+  border: none;
+}
+
+.fade {
+  transition: 0.3s ease-in-out;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-skeleton {
+  border-radius: 10px !important;
+}

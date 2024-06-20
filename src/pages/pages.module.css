@@ -1,0 +1,33 @@
+.heroColor {
+    color: var(--bg-zinc-600) !important;
+}
+
+.form {
+    width: 85vw;
+}
+
+.customBg {
+    background: linear-gradient(270deg, #e4e4e4, #fffbfb);
+    background-size: 400% 400%;
+    min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+    .heroAdjust {
+        width: 65% !important;
+    }
+
+    .form {
+        width: 450px !important;
+    }
+
+    .cartWidth {
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .form {
+        width: 350px !important;
+    }
+}
