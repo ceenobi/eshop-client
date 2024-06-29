@@ -19,7 +19,7 @@ export default function Drawer() {
       <IoMenu
         onClick={handleShow}
         size="30px"
-        className="d-md-none me-2 cursor"
+        className="d-md-none ms-4 cursor"
       />
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
@@ -80,7 +80,7 @@ export default function Drawer() {
             </>
           )}
           {!loggedInUser && (
-            <div>
+            <div className="d-flex flex-column">
               <NavLink
                 to="/cart"
                 className="fs-4 fw-medium"
@@ -91,15 +91,14 @@ export default function Drawer() {
               <hr />
               <NavLink
                 to="/login"
-                className="fs-4 fw-medium"
+                className="fs-4 fw-medium mb-4"
                 onClick={handleClose}
               >
                 Login
               </NavLink>
-              <br />
               <NavLink
                 to="/register"
-                className="fs-4 fw-medium"
+                className="fs-4 fw-medium mb-4"
                 onClick={handleClose}
               >
                 Register

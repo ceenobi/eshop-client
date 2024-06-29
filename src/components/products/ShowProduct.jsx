@@ -50,9 +50,8 @@ export default function ShowProduct({
                       effect="blur"
                       src={item}
                       alt={product?.name}
-                      width={"100%"}
+                      width="100%"
                       height={500}
-                      className="w-100 h-100"
                     />
 
                     <div
@@ -80,27 +79,26 @@ export default function ShowProduct({
             ))}
           </div>
           <div className="d-flex d-lg-none">
-            <ImageSlide image={product?.image} />
+            <ImageSlide image={product?.image} expandImg={expandImg} />
           </div>
         </Col>
         <Col md={6} lg={5} className="mb-5">
           <div>
-            <Headings text={product.name} />
+            <Headings text={product.name} size="1.6rem" />
             <Texts
               text={formatCurrency(product.price ? product.price : 0)}
               size="1.2rem"
               color="var(--bg-zinc-600)"
             />
             <ActionButton
-              text="Buy"
+              text="Add To Cart"
               onClick={() => addToCart(product)}
-              className="w-25"
+              className="w-50"
             />
             <Texts
               text="PRODUCT DETAIL"
               size="1.2rem"
-              color="var(--bg-zinc-600)"
-              className="mt-5 fw-bold"
+              className="mt-5 fw-medium"
             />
             <Texts text={product.description} color="var(--bg-zinc-600)" />
           </div>

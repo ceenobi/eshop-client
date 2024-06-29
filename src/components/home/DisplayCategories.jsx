@@ -13,7 +13,7 @@ export default function DisplayCategories({ categories }) {
             alt={name}
             width={150}
             height={150}
-            className="object-fit-contain mb-0 rounded-4"
+            className="object-fit-contain mb-0"
           />
           <Texts text={name} className="text-center fw-bold" />
         </Link>

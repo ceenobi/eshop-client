@@ -25,7 +25,7 @@ export default function Paginate({
           {page}
         </Pagination.Item>
         <span className="mx-2 mt-1 fw-bold">of</span>
-        <Pagination.Item>{totalPages ? totalPages : 1}</Pagination.Item>
+        <Pagination.Item>{totalPages ? totalPages : 0}</Pagination.Item>
         <Pagination.Next
           disabled={!nextPage}
           onClick={() => handlePageChange("next")}

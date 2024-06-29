@@ -13,11 +13,10 @@ export default function Nav() {
 
   return (
     <Container fluid="xl" className="p-3 d-flex align-items-center">
-      <Drawer />
       <NavLink to="/" className="me-4">
         <div className="d-flex align-items-center gap-1">
-          <GiWingfoot size="35px" color="#3f3f46" />
-          <span className="fs-4 fw-medium"> Footsy</span>
+          <GiWingfoot size="30px" color="#3f3f46" />
+          <span className="fs-5 fw-medium"> Footsy</span>
         </div>
       </NavLink>
       <div className="mx-lg-5 d-flex align-items-center gap-4 flex-grow-1">
@@ -66,7 +65,7 @@ export default function Nav() {
             </Dropdown.Menu>
           </Dropdown>
         ) : (
-          <NavLink to="/login">
+          <NavLink to="/login" className="d-none d-md-block">
             <IoPerson size="22px" />
           </NavLink>
         )}
@@ -84,6 +83,7 @@ export default function Nav() {
           )}
         </NavLink>
       </div>
+      <Drawer />
     </Container>
   );
 }

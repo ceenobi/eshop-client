@@ -20,25 +20,26 @@ export default function BestSeller({ bestSellerProducts }) {
           {bestSellerProducts?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
-              className="cardBox position-relative rounded-4"
+              className="cardBox position-relative rounded-4 border"
             >
               <Link
                 to={`/products/${item.category.toLowerCase()}/${item.slug}`}
               >
                 <LazyLoadImage
                   effect="blur"
-                  src={item.image[0]}
+                  src={item.image[1]}
                   alt={item.name}
                   width={"100%"}
                   height={450}
                   className="w-100 h-100 rounded-4 mb-0"
                 />
-                <div className="position-absolute top-0 p-4">
-                  <Texts text={item.name} className="fw-bold" />
+                <div className="position-absolute top-0 p-4 text-start">
                   <Texts
-                    text={formatCurrency(item.price)}
-                    className="fw-medium"
+                    text={item.name}
+                    className="fw-semibold"
+                    size="1.1rem"
                   />
+                  <Texts text={formatCurrency(item.price)} />
                 </div>
               </Link>
             </SwiperSlide>
@@ -55,15 +56,15 @@ export default function BestSeller({ bestSellerProducts }) {
           >
             <LazyLoadImage
               effect="blur"
-              src={item.image[0]}
+              src={item.image[1]}
               alt={item.name}
               width={300}
               height={450}
               className="w-100 h-100 object-fit-cover rounded-4 mb-0"
             />
             <div className="position-absolute top-0 p-4">
-              <Texts text={item.name} className="fw-bold" />
-              <Texts text={formatCurrency(item.price)} className="fw-medium" />
+              <Texts text={item.name} className="fw-semibold" size="1.1rem" />
+              <Texts text={formatCurrency(item.price)} />
             </div>
           </Link>
         ))}

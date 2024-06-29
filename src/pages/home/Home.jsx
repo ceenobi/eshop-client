@@ -23,11 +23,15 @@ const links = [
     id: 1,
     path: "/orders",
     name: "Orders",
+    variant: "primary",
+    color: "text-white",
   },
   {
     id: 2,
     path: "/profile",
     name: "Profile",
+    variant: "outline-primary",
+    color: "text-primary",
   },
 ];
 
@@ -157,19 +161,19 @@ export default function Home() {
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text="Quick Links"
-            className="text-black"
+            className="text-black fw-semibold"
             extra={styles.heroAdjust}
             size="1.5rem"
           />
           <div className="mt-3 d-flex gap-3">
-            {links.map(({ id, name, path }) => (
+            {links.map(({ id, name, path, color, variant }) => (
               <ActionButton
                 key={id}
                 text={name}
                 as={Link}
                 to={path}
-                className="text-white rounded-4 btns"
-                variant="none"
+                className={`rounded-4 ${color}`}
+                variant={variant}
               />
             ))}
           </div>
