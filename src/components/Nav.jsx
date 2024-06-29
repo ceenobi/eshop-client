@@ -2,9 +2,10 @@ import { useStore } from "@/hooks";
 import { IoLogOut } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import classnames from "classnames";
-import { IoSearch, IoCartSharp, IoPerson } from "react-icons/io5";
+import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { Badge, Container, Dropdown } from "react-bootstrap";
 import { GiWingfoot } from "react-icons/gi";
+import { GoPerson } from "react-icons/go";
 import Drawer from "./Drawer";
 
 export default function Nav() {
@@ -36,7 +37,7 @@ export default function Nav() {
       </div>
       <div className="d-flex align-items-center gap-4">
         <NavLink to="/search">
-          <IoSearch size="22px" />
+          <CiSearch size="22px" />
         </NavLink>
 
         {loggedInUser ? (
@@ -53,10 +54,10 @@ export default function Nav() {
                 Hi, {loggedInUser?.username}
               </Dropdown.ItemText>
               <Dropdown.Item as={NavLink} to="/profile">
-                <IoPerson className="me-1" /> Profile
+                <GoPerson className="me-1" /> Profile
               </Dropdown.Item>
               <Dropdown.Item as={NavLink} to={`/orders`}>
-                <IoCartSharp className="me-1" />
+                <CiShoppingCart className="me-1" />
                 Orders
               </Dropdown.Item>
               <Dropdown.ItemText onClick={logout} className="cursor">
@@ -66,11 +67,11 @@ export default function Nav() {
           </Dropdown>
         ) : (
           <NavLink to="/login" className="d-none d-md-block">
-            <IoPerson size="22px" />
+            <GoPerson size="22px" />
           </NavLink>
         )}
         <NavLink to="/cart" className="position-relative">
-          <IoCartSharp size="22px" />
+          <CiShoppingCart size="22px" />
           {cartQuantity > 0 && (
             <Badge
               pill

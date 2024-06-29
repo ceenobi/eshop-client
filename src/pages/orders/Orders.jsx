@@ -2,14 +2,15 @@ import { orderService } from "@/api";
 import { Headings, Loader, Paginate, Texts } from "@/components";
 import { useFetch, useStore, useTitle } from "@/hooks";
 import { useMemo, lazy, Suspense } from "react";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import {
   useNavigate,
   useSearchParams,
   useLocation,
   Outlet,
 } from "react-router-dom";
-import { MdRemoveShoppingCart } from "react-icons/md";
+import { CiShoppingCart } from "react-icons/ci";
+import Skeleton from "react-loading-skeleton";
 
 const AllOrders = lazy(() => import("@/components/orders/AllOrders"));
 
@@ -20,7 +21,7 @@ export default function Orders() {
   const navigate = useNavigate();
   const location = useLocation();
   const page = searchParams.get("page") || 1;
-  const { data, error } = useFetch(
+  const { data, error, loading } = useFetch(
     orderService.getAllClientOrders,
     loggedInUser?._id,
     page
@@ -51,8 +52,6 @@ export default function Orders() {
     navigate(window.location.pathname + "?" + params.toString());
   };
 
-  console.log(yourOrders);
-
   return (
     <Container fluid="xl" className="px-3 py-5">
       {location.pathname === "/orders" ? (
@@ -63,7 +62,20 @@ export default function Orders() {
               {error?.response?.data?.error || error.message}
             </Alert>
           )}
-          {!error && orders?.length > 0 ? (
+          {loading && (
+            <Row className="my-5">
+              {Array.from({ length: 3 }, (_, index) => (
+                <Col xs={12} key={index} className="mb-4">
+                  <Skeleton
+                    height="180px"
+                    containerClassName="product-skeleton"
+                    className="rounded-3"
+                  />
+                </Col>
+              ))}
+            </Row>
+          )}
+          {!error && !loading && orders && orders?.length > 0 && (
             <>
               <Suspense fallback={<Loader />}>
                 {orders?.map((order) => (
@@ -82,11 +94,12 @@ export default function Orders() {
                 itemsPerPage={itemsPerPage}
               />
             </>
-          ) : (
+          )}
+          {!error && !loading && orders && orders?.length === 0 && (
             <div className="mt-5 text-center">
-              <MdRemoveShoppingCart size="80px" />
+              <CiShoppingCart size="50px" />
               <Texts
-                text="Your have no orders made yet 😭 "
+                text="Your have no orders made yet!"
                 size="1.3rem"
                 className="mt-2 fw-medium text-center"
               />

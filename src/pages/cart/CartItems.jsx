@@ -4,9 +4,8 @@ import { formatCurrency } from "@/utils";
 import { Container } from "react-bootstrap";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { MdRemoveShoppingCart } from "react-icons/md";
-import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
-import styles from "../pages.module.css"
+import { CiCirclePlus, CiCircleMinus, CiShoppingCart } from "react-icons/ci";
+import styles from "../pages.module.css";
 
 export default function CartItems() {
   useTitle("Your cart");
@@ -38,16 +37,19 @@ export default function CartItems() {
           </div>
           <br />
           <br />
-          <hr style={{ maxWidth: "768px" }} className="mx-auto" />
+          <hr style={{ maxWidth: "800px" }} className="mx-auto" />
           <br />
           <br />
           <div style={{ maxWidth: "800px" }} className="mx-auto">
             {cartItems?.map((item) => (
               <div
-                className="d-flex justify-content-between mb-4"
+                className="d-md-flex justify-content-between mb-4"
                 key={item._id}
               >
-                <div className="d-flex flex-wrap flex-lg-nowrap gap-2 gap-lg-4">
+                <div
+                  className="d-flex flex-wrap flex-md-nowrap gap-2 gap-lg-4"
+                  style={{ maxWidth: "700px" }}
+                >
                   <Link
                     to={`/products/${item.category.toLowerCase()}/${item.slug}`}
                   >
@@ -57,7 +59,7 @@ export default function CartItems() {
                       alt={item.name}
                       width={130}
                       height={130}
-                      className="w-100 h-100 object-fit-cover"
+                      className="object-fit-cover"
                     />
                   </Link>
                   <div>
@@ -68,15 +70,15 @@ export default function CartItems() {
                     >
                       <Texts
                         text={item.name}
-                        size="1.3rem"
+                        size="1.2rem"
                         className="mb-0 fw-medium text-capitalize"
                       />
                     </Link>
-                    <div className="d-flex gap-5 align-items-center">
+                    <div className="d-flex justify-content-between justify-content-md-start gap-md-5 align-items-center">
                       <Texts
                         text={formatCurrency(item.price)}
-                        size="1.2rem"
-                        className="mt-3 fw-medium"
+                        size="1rem"
+                        className="mt-3"
                       />
                       <div
                         className="d-flex gap-2 align-items-center  p-1"
@@ -85,8 +87,7 @@ export default function CartItems() {
                         <ActionButton
                           text={
                             <>
-                              {" "}
-                              <CiCircleMinus size="16px" color="black" />
+                              <CiCircleMinus size="18px" color="black" />
                             </>
                           }
                           size="sm"
@@ -98,7 +99,7 @@ export default function CartItems() {
                           text={
                             <>
                               {" "}
-                              <CiCirclePlus size="16px" color="black" />
+                              <CiCirclePlus size="18px" color="black" />
                             </>
                           }
                           size="sm"
@@ -117,8 +118,8 @@ export default function CartItems() {
                 />
               </div>
             ))}
-            <br />
-            <br />
+
+            <br className="d-none d-md-block" />
             <hr />
             <br />
             <br />
@@ -149,11 +150,25 @@ export default function CartItems() {
         </>
       ) : (
         <div className="mt-5 text-center">
-          <MdRemoveShoppingCart size="80px" />
+          <CiShoppingCart size="50px" />
           <Texts
-            text="Your cart is empty 😭 "
+            text="Your Cart is Empty!"
             size="1.3rem"
-            className="mt-2 fw-medium text-center"
+            className="mt-2 mb-0 fw-medium text-center"
+          />
+          <Texts
+            text="Browse all categories and discover our new arrivals"
+            size="1rem"
+            className="text-center"
+          />
+          <ActionButton
+            text="Buy Now"
+            variant="primary"
+            as={Link}
+            to="/products/heels"
+            size="lg"
+            style={{ width: "200px" }}
+            className="text-white"
           />
         </div>
       )}

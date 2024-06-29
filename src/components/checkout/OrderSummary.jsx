@@ -1,6 +1,5 @@
 import { Alert, Card } from "react-bootstrap";
 import styles from "../../pages/pages.module.css";
-import Texts from "../Texts";
 import { useFetch, useStore, useTitle } from "@/hooks";
 import { formatCurrency, tryCatchFn } from "@/utils";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,15 +7,16 @@ import { orderService } from "@/api";
 import { FaListAlt } from "react-icons/fa";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { useMemo, useState } from "react";
-import Loader from "../Loader";
-import ActionButton from "../ActionButton";
 import { toast } from "react-toastify";
-import ModalView from "../ModalView";
-import Headings from "../Headings";
+import Loader from "../Loader";
+import Texts from "../Texts";
+import ActionButton from "../ActionButton";
+// import ModalView from "../ModalView";
+// import Headings from "../Headings";
 
 export default function OrderSummary() {
   useTitle("Your order summary");
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
@@ -50,10 +50,11 @@ export default function OrderSummary() {
       token
     );
     if (status === 201) {
-      toast.success(data.msg);
-      setShowModal(true);
-      setDiscountCode(null);
+      // setOrderId(data?.order._id);
+      // setShowModal(true);
       setCartItems([]);
+      toast.success(data.msg);
+      setDiscountCode(null);
       setStep(1);
       navigate(`/orders/${data.order._id}`);
     }
@@ -101,7 +102,7 @@ export default function OrderSummary() {
                       text="Name"
                       size="1rem"
                       color="var(--bg-zinc-700)"
-                      className="fw-semibold mb-0"
+                      className="fw-semibold mb-2"
                     />
                     <Texts
                       text={shippingDetails.fullname}
@@ -115,7 +116,7 @@ export default function OrderSummary() {
                       text="Address"
                       size="1rem"
                       color="var(--bg-zinc-700)"
-                      className="fw-semibold mb-0"
+                      className="fw-semibold mb-2"
                     />
                     <Texts
                       text={shippingDetails.address}
@@ -129,7 +130,7 @@ export default function OrderSummary() {
                       text="Phone"
                       size="1rem"
                       color="var(--bg-zinc-700)"
-                      className="fw-semibold mb-0"
+                      className="fw-semibold mb-2"
                     />
                     <Texts
                       text={shippingDetails.phone}
@@ -143,7 +144,7 @@ export default function OrderSummary() {
                       text="State"
                       size="1rem"
                       color="var(--bg-zinc-700)"
-                      className="fw-semibold mb-0"
+                      className="fw-semibold mb-2"
                     />
                     <Texts
                       text={shippingDetails.state}
@@ -157,13 +158,13 @@ export default function OrderSummary() {
                       text="Country"
                       size="1rem"
                       color="var(--bg-zinc-700)"
-                      className="fw-semibold mb-0"
+                      className="fw-semibold mb-2"
                     />
                     <Texts
                       text={shippingDetails.country}
                       size="14px"
                       color="var(--bg-zinc-700)"
-                      className="mb-0"
+                      className="mb-2"
                     />
                   </div>
                 </>
@@ -347,7 +348,7 @@ export default function OrderSummary() {
               <Texts text="Proceed to create your order" size="1.2rem" />
             </div>
             <ActionButton
-              text="Checkout"
+              text="Create Order"
               className={`mt-3 border-0 p-2 ${styles.form}`}
               variant="dark"
               pending={isLoading}
@@ -365,29 +366,27 @@ export default function OrderSummary() {
           </div>
         </div>
       )}
-      <ModalView
+
+      {/* <ModalView
         show={showModal}
         handleClose={() => setShowModal(false)}
         backdrop="static"
       >
-        <Headings
-          text="Hurray 👏 👏 👏"
-          extra="text-center text-success"
-          size="1.2rem"
-        />
-        <Headings
+        <Headings text="Hurray 👏 👏 👏" extra="text-center" size="1.4rem" />
+        <Texts
           text="Your order was successfully created"
-          extra="text-center text-success"
+          className="text-center"
           size="1.2rem"
         />
         <div className="text-center">
           <ActionButton
             text="View order details"
-            className={`mt-3 p-2 text-center`}
+            className={`mt-2 text-center`}
             variant="success"
+            onClick={() => navigate(`/orders/${orderId}`)}
           />
         </div>
-      </ModalView>
+      </ModalView> */}
     </>
   );
 }

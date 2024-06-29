@@ -1,5 +1,12 @@
 import { orderService } from "@/api";
-import { ActionButton, Headings, ModalView, Paypal, Paystack, Texts } from "@/components";
+import {
+  ActionButton,
+  Headings,
+  ModalView,
+  Paypal,
+  Paystack,
+  Texts,
+} from "@/components";
 import { useFetch, useStore } from "@/hooks";
 import { formatDate, orderProgress, tryCatchFn } from "@/utils";
 import { useMemo, useState } from "react";
@@ -10,12 +17,13 @@ import { FaPaypal } from "react-icons/fa6";
 import { SiPicpay } from "react-icons/si";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { IoCheckmarkCircle } from "react-icons/io5";
+import Skeleton from "react-loading-skeleton";
 
 export default function OrderDetails() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { token } = useStore();
   const { orderId } = useParams();
-  const { data, error, setData } = useFetch(
+  const { data, error, setData, loading } = useFetch(
     orderService.getASingleOrder,
     orderId
   );
@@ -58,8 +66,30 @@ export default function OrderDetails() {
             Order: <span className="fs-6 text-success">{orderId}</span>
           </>
         }
-        size="1.8rem"
+        size="1.5rem"
       />
+      {loading && (
+        <>
+          {Array.from({ length: 1 }, (_, index) => (
+            <Row className="my-5" key={index}>
+              <Col md={6} lg={7} className="mb-4">
+                <Skeleton
+                  height="380px"
+                  containerClassName="product-skeleton"
+                  className="rounded-3"
+                />
+              </Col>
+              <Col md={6} lg={5} className="mb-4">
+                <Skeleton
+                  height="150px"
+                  containerClassName="product-skeleton"
+                  className="rounded-3"
+                />
+              </Col>
+            </Row>
+          ))}
+        </>
+      )}
       <Row className="justify-content-between">
         <Col md={6} lg={7}>
           <div className="mt-4 bg-light shadow-sm rounded-3 p-3 border">

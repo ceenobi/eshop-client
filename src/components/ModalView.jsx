@@ -15,7 +15,7 @@ export default function ModalView({
         <Modal.Title style={{ fontSize: "18px" }} className="fw-bold">
           {title}
         </Modal.Title>
-        <IoClose size="20px" onClick={handleClose} className="cursor" />
+        <IoClose size="24px" onClick={handleClose} className="cursor" />
       </div>
       <Modal.Body>{children}</Modal.Body>
     </Modal>

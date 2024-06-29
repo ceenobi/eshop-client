@@ -64,7 +64,7 @@ export default function Home() {
             color="var(--bg-zinc-600)"
             extra={styles.heroAdjust}
           />
-          <div className="d-flex align-items-center gap-1">
+          <div className="mt-4 mt-md-0 d-flex align-items-center gap-1">
             <Image
               src="https://primefaces.org/cdn/primereact/images/avatar/asiyajavayant.png"
               roundedCircle

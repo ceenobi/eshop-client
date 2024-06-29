@@ -47,7 +47,7 @@ export default function NoCheckout() {
                 className={`mt-3 border-0 text-white p-2 ${styles.form}`}
                 variant="dark"
                 as={Link}
-                to="/"
+                to="/products/heels"
               />
             </div>
           </div>

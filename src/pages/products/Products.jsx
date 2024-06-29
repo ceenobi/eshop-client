@@ -58,7 +58,7 @@ export default function Products() {
       <div className="mt-lg-5 mb-5 d-md-flex justify-content-between align-items-center">
         <Headings
           text={categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
-          className="fw-bold text-black"
+          extra="fw-bold text-black mb-4 mb-md-0"
         />
         <div className="d-flex align-items-center gap-1">
           <Image

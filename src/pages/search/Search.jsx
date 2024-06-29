@@ -4,6 +4,7 @@ import { useFetch, useTitle } from "@/hooks";
 import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Alert, Container, Form } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
+import Skeleton from "react-loading-skeleton";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -12,7 +13,10 @@ export default function Search() {
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const query = searchParams.get("query") || inputRef.current?.value || "";
-  const { data, error } = useFetch(productService.searchProducts, query);
+  const { data, error, loading } = useFetch(
+    productService.searchProducts,
+    query
+  );
   const searchResult = useMemo(() => data, [data]);
   useTitle(`Search results for ${query}`);
 
@@ -81,6 +85,19 @@ export default function Search() {
           {error?.response?.data?.error || error.message}
         </Alert>
       )}
+      {loading && (
+        <div className="mt-3 d-flex gap-4 align-items-center flex-wrap">
+          {Array.from({ length: 4 }, (_, index) => (
+            <Skeleton
+              key={index}
+              height="30px"
+              width="150px"
+              containerClassName="product-skeleton"
+              className="rounded-3"
+            />
+          ))}
+        </div>
+      )}
       {!error && searchResult.length > 0 && (
         <Suspense fallback={<Loader />}>
           <div className="mt-4 d-flex flex-wrap gap-4 align-items-center">
@@ -94,7 +111,10 @@ export default function Search() {
                     .split(new RegExp(`(${query})`, "gi"))
                     .map((part, index) =>
                       part.toLowerCase() === query.toLowerCase() ? (
-                        <span key={index} style={{ color: "green" }}>
+                        <span
+                          key={index}
+                          className="fw-bold text-success"
+                        >
                           {part}
                         </span>
                       ) : (
@@ -108,7 +128,7 @@ export default function Search() {
           </div>
         </Suspense>
       )}
-      {!error && query && searchResult.length <= 0 && (
+      {!error && !loading && query && searchResult.length <= 0 && (
         <Texts
           text={
             <>
@@ -116,7 +136,7 @@ export default function Search() {
             </>
           }
           size="0.8rem"
-          className="mt-5 text-uppercase"
+          className="mt-3 text-uppercase"
         />
       )}
     </Container>

@@ -1,7 +1,9 @@
 import { useStore } from "@/hooks";
 import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
-import { IoCartSharp, IoLogOut, IoMenu, IoPerson } from "react-icons/io5";
+import { IoLogOut, IoMenu} from "react-icons/io5";
+import { GoPerson } from "react-icons/go";
+import { CiShoppingCart } from "react-icons/ci";
 import { NavLink, useLocation } from "react-router-dom";
 import Texts from "./Texts";
 import classnames from "classnames";
@@ -52,7 +54,7 @@ export default function Drawer() {
                 }`}
                 onClick={handleClose}
               >
-                <IoPerson className="me-1" /> Profile
+                <GoPerson className="me-1" /> Profile
               </NavLink>
               <br />
               <NavLink
@@ -62,7 +64,7 @@ export default function Drawer() {
                 }`}
                 onClick={handleClose}
               >
-                <IoCartSharp className="me-1" />
+                <CiShoppingCart className="me-1" />
                 Orders
               </NavLink>
               <hr />
