@@ -9,7 +9,6 @@ import {
   ForgotPassword,
   Login,
   OrderDetails,
-  Orders,
   ProductDetail,
   Profile,
   Register,
@@ -21,6 +20,7 @@ import { ProtectedUser } from "./ProtectedRoutes";
 import { lazy, Suspense } from "react";
 const PageNotFound = lazy(() => import("@/components/PageNotFound"));
 const Home = lazy(() => import("@/pages/home/Home"));
+const Orders = lazy(() => import("@/pages/orders/Orders"));
 
 export default function AppRoutes() {
   const { token } = useStore();
@@ -78,9 +78,11 @@ export default function AppRoutes() {
         {
           path: "orders",
           element: (
-            <ProtectedUser isAuth={token}>
-              <Orders />
-            </ProtectedUser>
+            <Suspense fallback={<Loader />}>
+              <ProtectedUser isAuth={token}>
+                <Orders />
+              </ProtectedUser>
+            </Suspense>
           ),
           children: [
             {

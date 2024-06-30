@@ -1,7 +1,7 @@
 import { orderService } from "@/api";
-import { Headings, Loader, Paginate, Texts } from "@/components";
+import { Headings, Paginate, Texts, AllOrders } from "@/components";
 import { useFetch, useStore, useTitle } from "@/hooks";
-import { useMemo, lazy, Suspense } from "react";
+import { useMemo } from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import {
   useNavigate,
@@ -11,8 +11,6 @@ import {
 } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
 import Skeleton from "react-loading-skeleton";
-
-const AllOrders = lazy(() => import("@/components/orders/AllOrders"));
 
 export default function Orders() {
   const [searchParams] = useSearchParams();
@@ -77,11 +75,9 @@ export default function Orders() {
           )}
           {!error && !loading && orders && orders?.length > 0 && (
             <>
-              <Suspense fallback={<Loader />}>
-                {orders?.map((order) => (
-                  <AllOrders key={order._id} {...order} />
-                ))}
-              </Suspense>
+              {orders?.map((order) => (
+                <AllOrders key={order._id} {...order} />
+              ))}
               <Paginate
                 prevPage={prevPage}
                 nextPage={nextPage}

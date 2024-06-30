@@ -13,21 +13,21 @@ const validateFields = {
     required: "Required field.",
     validate: {
       minLength: (v) =>
-        v.length >= 5 || "Password should not be less than 5 characters",
+        v.length >= 6 || "Password should not be less than 5 characters",
     },
   },
   confirmPassword: {
     required: "Required field.",
     validate: {
       minLength: (v) =>
-        v.length >= 5 || "Password should not be less than 5 characters",
+        v.length >= 6 || "Password should not be less than 5 characters",
     },
   },
   currentPassword: {
     required: "Please enter your current password",
     validate: {
       minLength: (v) =>
-        v.length >= 5 || "Password should not be less than 5 characters",
+        v.length >= 6 || "Password should not be less than 5 characters",
     },
   },
   username: {

@@ -17,7 +17,7 @@ export default function RootLayout() {
           text={
             <>
               Powered by{" "}
-              <a href="#" className="text-success">
+              <a href="#" className="text-primary">
                 TEEM
               </a>
             </>

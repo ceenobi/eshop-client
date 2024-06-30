@@ -12,7 +12,7 @@ const handleError = (error) => {
   if (error?.response) {
     return toast.error(
       error.response.data.message ||
-        error.response.data?.error ||
+        error.response.data?.error ||  error.response.data?.errors[0]?.msg ||
         "An error occured",
       {
         toastId: customId,
