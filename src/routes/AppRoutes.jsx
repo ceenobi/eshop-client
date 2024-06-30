@@ -7,7 +7,6 @@ import {
   Checkout,
   EditProfile,
   ForgotPassword,
-  Home,
   Login,
   OrderDetails,
   Orders,
@@ -21,6 +20,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedUser } from "./ProtectedRoutes";
 import { lazy, Suspense } from "react";
 const PageNotFound = lazy(() => import("@/components/PageNotFound"));
+const Home = lazy(() => import("@/pages/home/Home"));
 
 export default function AppRoutes() {
   const { token } = useStore();
@@ -33,7 +33,11 @@ export default function AppRoutes() {
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: (
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
+          ),
         },
         {
           path: "products",
