@@ -17,7 +17,12 @@ export default function RootLayout() {
           text={
             <>
               Powered by{" "}
-              <a href="#" className="text-primary">
+              <a
+                href="https://teemcommerce.netlify.app"
+                className="text-primary"
+                target="_blank"
+                rel="noopener noreferrer" // Added for security and performance
+              >
                 TEEM
               </a>
             </>
