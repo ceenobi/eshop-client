@@ -86,14 +86,12 @@ export const StoreProvider = ({ children }) => {
 
   //get user
   const getUser = useCallback(async () => {
-    if (!token) return;
-    if (isTokenValid(token)) {
-      try {
-        const { data } = await userService.authUser(token);
-        setLoggedInUser(data);
-      } catch (error) {
-        console.error(error);
-      }
+    if (!token || !isTokenValid(token)) return;
+    try {
+      const { data } = await userService.authUser(token);
+      setLoggedInUser(data);
+    } catch (error) {
+      console.error(error);
     }
   }, [setLoggedInUser, token]);
 
