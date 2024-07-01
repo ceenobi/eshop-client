@@ -95,21 +95,21 @@ export default function Products() {
           {error?.response?.data?.error || error.message}
         </Alert>
       )}
-      <Suspense fallback={<Loader />}>
-        {loading && (
-          <Row className="my-5">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Col md={4} lg={3} key={index}>
-                <Skeleton
-                  height="320px"
-                  containerClassName="product-skeleton"
-                  className="rounded-4"
-                />
-              </Col>
-            ))}
-          </Row>
-        )}
-        {!error && !loading && products?.length > 0 && (
+      {loading && (
+        <Row className="my-5">
+          {Array.from({ length: 4 }, (_, index) => (
+            <Col md={4} lg={3} key={index}>
+              <Skeleton
+                height="320px"
+                containerClassName="product-skeleton"
+                className="rounded-4"
+              />
+            </Col>
+          ))}
+        </Row>
+      )}
+      {!error && !loading && products?.length > 0 && (
+        <Suspense fallback={<Loader />}>
           <Row className="my-5">
             {products?.map((product) => (
               <Col md={4} lg={3} key={product._id}>
@@ -117,8 +117,8 @@ export default function Products() {
               </Col>
             ))}
           </Row>
-        )}
-      </Suspense>
+        </Suspense>
+      )}
       {!error && products?.length === 0 && (
         <Texts text="No products to display" size="1.3rem" />
       )}

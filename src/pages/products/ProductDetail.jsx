@@ -71,26 +71,26 @@ export default function ProductDetail() {
             {err?.response?.data?.error || err.message}
           </Alert>
         )}
-        <Suspense fallback={<Loader />}>
-          {isLoading && (
-            <>
-              <div className="d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
-                {Array.from({ length: 4 }, (_, index) => (
-                  <Skeleton
-                    height="430px"
-                    width="300px"
-                    containerClassName="product-skeleton"
-                    className="rounded-4"
-                    key={index}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-          {!err && !isLoading && dataB?.length > 0 && (
+        {isLoading && (
+          <>
+            <div className="d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
+              {Array.from({ length: 4 }, (_, index) => (
+                <Skeleton
+                  height="430px"
+                  width="300px"
+                  containerClassName="product-skeleton"
+                  className="rounded-4"
+                  key={index}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        {!err && !isLoading && dataB?.length > 0 && (
+          <Suspense fallback={<Loader />}>
             <RecommendProducts recommended={recommended} />
-          )}
-        </Suspense>
+          </Suspense>
+        )}
       </div>
     </>
   );
