@@ -1,22 +1,19 @@
 import {
   ActionButton,
   Headings,
-  Loader,
   ShopWithUs,
   Texts,
+  DisplayCategories,
+  LatestProducts,
+  BestSeller,
 } from "@/components";
 import styles from "../pages.module.css";
 import { Alert, Container, Image } from "react-bootstrap";
 import { categoryService, productService } from "@/api";
-import { useMemo, lazy, Suspense } from "react";
+import { useMemo } from "react";
 import { useFetch, useTitle } from "@/hooks";
 import { Link } from "react-router-dom";
-
-const DisplayCategories = lazy(() =>
-  import("@/components/home/DisplayCategories")
-);
-const LatestProducts = lazy(() => import("@/components/home/LatestProducts"));
-const BestSeller = lazy(() => import("@/components/home/BestSeller"));
+import Skeleton from "react-loading-skeleton";
 
 const links = [
   {
@@ -37,15 +34,21 @@ const links = [
 
 export default function Home() {
   useTitle("Footsy Home");
-  const { data: cat, error: errCat } = useFetch(
-    categoryService.getAllCategories
-  );
-  const { data: newProductsData, error } = useFetch(
-    productService.getNewProducts
-  );
-  const { data: bestSelling, error: err } = useFetch(
-    productService.getBestSellerProducts
-  );
+  const {
+    data: cat,
+    error: errCat,
+    loading: catLoad,
+  } = useFetch(categoryService.getAllCategories);
+  const {
+    data: newProductsData,
+    error: errNew,
+    loading: newLoad,
+  } = useFetch(productService.getNewProducts);
+  const {
+    data: bestSelling,
+    error: errBest,
+    loading: bestLoad,
+  } = useFetch(productService.getBestSellerProducts);
   const categories = useMemo(() => cat, [cat]);
   const newProducts = useMemo(() => newProductsData, [newProductsData]);
   const bestSellerProducts = useMemo(() => bestSelling, [bestSelling]);
@@ -86,13 +89,24 @@ export default function Home() {
         </div>
         {errCat && (
           <Alert variant="danger" className="mt-5">
-            {error?.response?.data?.error || error.message}
+            {errCat?.response?.data?.error || errCat?.message}
           </Alert>
         )}
+        {catLoad && (
+          <div className="mt-5 px-3 d-flex justify-content-center gap-5 overflow-x-auto overflow-y-hidden">
+            {Array.from({ length: 4 }, (_, index) => (
+              <Skeleton
+                key={index}
+                height="200px"
+                width="200px"
+                containerClassName="product-skeleton"
+                className="rounded-4"
+              />
+            ))}
+          </div>
+        )}
       </Container>
-      <Suspense fallback={<Loader />}>
-        <DisplayCategories categories={categories} />
-      </Suspense>
+      <DisplayCategories categories={categories} />
       <Container fluid="xl" className="px-3">
         <div style={{ marginTop: "6rem" }}>
           <Headings
@@ -106,16 +120,27 @@ export default function Home() {
             extra={`${styles.heroAdjust} mb-4`}
             size="1.5rem"
           />
-          {error && (
+          {errNew && (
             <Alert variant="danger" className="mt-5">
-              {error?.response?.data?.error || error.message}
+              {errNew?.response?.data?.error || errNew.message}
             </Alert>
           )}
         </div>
+        {newLoad && (
+          <div className="mt-5 px-3 d-flex justify-content-center gap-5 overflow-x-auto overflow-y-hidden">
+            {Array.from({ length: 4 }, (_, index) => (
+              <Skeleton
+                key={index}
+                height="350px"
+                width="265px"
+                containerClassName="product-skeleton"
+                className="rounded-4"
+              />
+            ))}
+          </div>
+        )}
       </Container>
-      <Suspense fallback={<Loader />}>
-        <LatestProducts newProducts={newProducts} />
-      </Suspense>
+      <LatestProducts newProducts={newProducts} />
       <Container fluid="xl" className="px-3">
         <div style={{ marginTop: "6rem" }}>
           <Headings
@@ -147,16 +172,27 @@ export default function Home() {
             extra={`${styles.heroAdjust} mb-4}`}
             size="1.5rem"
           />
-          {err && (
+          {errBest && (
             <Alert variant="danger" className="mt-5">
-              {err?.response?.data?.error || err.message}
+              {errBest?.response?.data?.error || errBest.message}
             </Alert>
           )}
         </div>
+        {bestLoad && (
+          <div className="mt-5 px-3 d-flex justify-content-center gap-5 overflow-x-auto overflow-y-hidden">
+            {Array.from({ length: 4 }, (_, index) => (
+              <Skeleton
+                key={index}
+                height="200px"
+                width="200px"
+                containerClassName="product-skeleton"
+                className="rounded-4"
+              />
+            ))}
+          </div>
+        )}
       </Container>
-      <Suspense fallback={<Loader />}>
-        <BestSeller bestSellerProducts={bestSellerProducts} />
-      </Suspense>
+      <BestSeller bestSellerProducts={bestSellerProducts} />
       <Container fluid="xl" className="px-3">
         <div style={{ marginTop: "6rem" }}>
           <Headings
