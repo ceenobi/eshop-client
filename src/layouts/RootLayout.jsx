@@ -19,7 +19,7 @@ export default function RootLayout() {
               Powered by{" "}
               <a
                 href="https://teemcommerce.netlify.app"
-                className="text-primary"
+                style={{ color: "var(--bg-blue-400" }}
                 target="_blank"
                 rel="noopener noreferrer" // Added for security and performance
               >

@@ -111,10 +111,7 @@ export default function Search() {
                     .split(new RegExp(`(${query})`, "gi"))
                     .map((part, index) =>
                       part.toLowerCase() === query.toLowerCase() ? (
-                        <span
-                          key={index}
-                          className="fw-bold text-success"
-                        >
+                        <span key={index} className="fw-bold text-success">
                           {part}
                         </span>
                       ) : (
@@ -122,6 +119,7 @@ export default function Search() {
                       )
                     )}
                   size="0.8rem"
+                  color="var(--bg-zinc-700)"
                 />
               </Link>
             ))}

@@ -121,6 +121,7 @@ export default function EditProfile() {
               size="lg"
               disabled={isSubmitting}
               type="submit"
+              style={{ backgroundColor: "var(--bg-blue-400)" }}
             />
           </Form>
         </div>

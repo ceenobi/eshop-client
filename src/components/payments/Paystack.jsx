@@ -29,7 +29,7 @@ export default function Paystack({ order, updatePayment }) {
     text: "Click to pay",
     onSuccess: (reference) => handlePaystackSuccessAction(reference),
     onClose: handlePaystackCloseAction,
-    className: "border-0 bg-info text-white w-100 p-2 rounded-3",
+    className: "border-0 bg-info text-white w-100 p-2 rounded-3 fw-medium",
   };
 
   return <PaystackButton {...componentProps} />;

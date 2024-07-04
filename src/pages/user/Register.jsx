@@ -89,6 +89,7 @@ export default function Register() {
           className="w-100 mt-2"
           size="lg"
           disabled={isSubmitting}
+          style={{ backgroundColor: "var(--bg-blue-400)" }}
           type="submit"
         />
       </Form>

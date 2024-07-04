@@ -93,7 +93,8 @@ export default function ShowProduct({
             <ActionButton
               text="Add To Cart"
               onClick={() => addToCart(product)}
-              className="w-50"
+              className="w-50 border-0 py-2"
+              style={{backgroundColor: "var(--bg-blue-400"}}
             />
             <Texts
               text="PRODUCT DETAIL"

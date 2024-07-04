@@ -12,7 +12,7 @@ export default function ActionButton({
   return (
     <Button
       type={type}
-      className={`fw-medium ${className}`}
+      className={`fw-medium border-0 ${className}`}
       size={size}
       variant={variant}
       {...props}

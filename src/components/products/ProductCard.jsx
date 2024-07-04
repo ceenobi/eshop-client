@@ -32,15 +32,17 @@ export default function ProductCard({ product }) {
           text={name}
           className="my-2 fw-semibold text-start"
           size="0.9rem"
+          color="var(--bg-zinc-700)"
         />
       </Link>
       <div className="mt-2 d-flex justify-content-between">
-        <Texts text={formatCurrency(price)} size="0.9rem"/>
+        <Texts text={formatCurrency(price)} size="0.9rem" />
         <IoCartSharp
-          size="24px"
+          size="22px"
           onClick={() => addToCart(product)}
-          className="cursor text-black"
+          className="cursor"
           title="Add item to cart"
+          color="#3f3f46"
         />
       </div>
     </div>

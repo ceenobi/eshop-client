@@ -140,6 +140,7 @@ export default function ShippingForm({ step, setStep }) {
         size="lg"
         disabled={isSubmitting}
         type="submit"
+        style={{ backgroundColor: "var(--bg-blue-400)" }}
       />
     </Form>
   );

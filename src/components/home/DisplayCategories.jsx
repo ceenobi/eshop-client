@@ -19,7 +19,7 @@ export default function DisplayCategories({ categories }) {
             height={150}
             className="object-fit-fill"
           />
-          <Texts text={name} className="mt-2 text-center fw-medium" />
+          <Texts text={name} className="mt-2 text-center fw-medium text-black" />
         </Link>
       ))}
     </div>

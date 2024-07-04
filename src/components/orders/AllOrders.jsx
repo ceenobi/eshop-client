@@ -11,7 +11,7 @@ export default function AllOrders({
   quantity,
   createdAt,
   isPaid,
-  reference
+  reference,
 }) {
   return (
     <>
@@ -19,7 +19,10 @@ export default function AllOrders({
         <Texts
           text={
             <>
-              Reference: <small className="text-success">{reference ? reference : _id}</small>
+              Reference:{" "}
+              <small className="text-success">
+                {reference ? reference : _id}
+              </small>
             </>
           }
           size="1rem"
@@ -73,7 +76,10 @@ export default function AllOrders({
               className="text-white"
               as={Link}
               to={`/orders/${_id}`}
-              style={{ width: "fit-content" }}
+              style={{
+                width: "fit-content",
+                backgroundColor: "var(--bg-blue-400)",
+              }}
             />
           </Col>
         </Row>

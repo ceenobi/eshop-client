@@ -36,10 +36,13 @@ export default function LatestProducts({ newProducts }) {
                 <div className="position-absolute top-0 p-4 text-start">
                   <Texts
                     text={item.name}
-                    className="fw-semibold"
+                    className="fw-semibold text-black"
                     size="1.1rem"
                   />
-                  <Texts text={formatCurrency(item.price)} />
+                  <Texts
+                    text={formatCurrency(item.price)}
+                    color="var(--bg-zinc-700)"
+                  />
                 </div>
               </Link>
             </SwiperSlide>

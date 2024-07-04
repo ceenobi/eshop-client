@@ -30,7 +30,12 @@ main {
 }
 
 a {
-  color: inherit !important;
+  /* color: inherit !important; */
+  transition: 0.3 ease-in-out !important;
+}
+
+button:hover {
+  filter: brightness(90%);
   transition: 0.3 ease-in-out !important;
 }
 

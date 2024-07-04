@@ -33,6 +33,7 @@ export default function CartItems() {
               className="mt-2 text-white"
               as={Link}
               to="/checkout"
+              style={{ backgroundColor: "var(--bg-blue-400)" }}
             />
           </div>
           <br />
@@ -72,6 +73,7 @@ export default function CartItems() {
                         text={item.name}
                         size="1.2rem"
                         className="mb-0 fw-medium text-capitalize"
+                        color="var(--bg-zinc-700)"
                       />
                     </Link>
                     <div className="d-flex justify-content-between justify-content-md-start gap-md-5 align-items-center">
@@ -79,6 +81,7 @@ export default function CartItems() {
                         text={formatCurrency(item.price)}
                         size="1rem"
                         className="mt-3"
+                        color="var(--bg-zinc-700)"
                       />
                       <div
                         className="d-flex gap-2 align-items-center  p-1"
@@ -87,7 +90,7 @@ export default function CartItems() {
                         <ActionButton
                           text={
                             <>
-                              <CiCircleMinus size="18px" color="black" />
+                              <CiCircleMinus size="20px" color="black" />
                             </>
                           }
                           size="sm"
@@ -99,7 +102,7 @@ export default function CartItems() {
                           text={
                             <>
                               {" "}
-                              <CiCirclePlus size="18px" color="black" />
+                              <CiCirclePlus size="20px" color="black" />
                             </>
                           }
                           size="sm"
@@ -113,8 +116,9 @@ export default function CartItems() {
                 <Texts
                   text="Remove"
                   size="1rem"
-                  className="text-primary cursor remove"
+                  className="cursor remove"
                   onClick={() => removeFromCart(item._id)}
+                  color="var(--bg-blue-400)"
                 />
               </div>
             ))}
@@ -131,19 +135,22 @@ export default function CartItems() {
                   text="Subtotal"
                   size="1rem"
                   className="fw-medium text-center"
+                  color="var(--bg-zinc-700)"
                 />
                 <Texts
                   text={formatCurrency(priceTotal)}
                   size="1rem"
                   className="text-center"
+                  color="var(--bg-zinc-700)"
                 />
               </div>
               <hr />
               <ActionButton
                 text="Check Out"
-                className="mt-2 text-white"
+                className="mt-2 text-white py-2"
                 as={Link}
                 to="/checkout"
+                style={{ backgroundColor: "var(--bg-blue-400)" }}
               />
             </div>
           </div>
