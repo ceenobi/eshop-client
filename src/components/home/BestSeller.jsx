@@ -66,8 +66,16 @@ export default function BestSeller({ bestSellerProducts }) {
               className="w-100 h-100 object-fit-cover rounded-4 mb-0"
             />
             <div className="position-absolute top-0 p-4">
-              <Texts text={item.name} className="fw-semibold" size="1.1rem" />
-              <Texts text={formatCurrency(item.price)} />
+              <Texts
+                text={item.name}
+                className="fw-semibold"
+                size="1.1rem"
+                color="var(--bg-zinc-700)"
+              />
+              <Texts
+                text={formatCurrency(item.price)}
+                color="var(--bg-zinc-700)"
+              />
             </div>
           </Link>
         ))}

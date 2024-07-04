@@ -29,6 +29,7 @@ const links = [
     name: "Profile",
     variant: "outline-primary",
     color: "text-primary",
+    border: "1px solid blue"
   },
 ];
 
@@ -202,13 +203,13 @@ export default function Home() {
             size="1.5rem"
           />
           <div className="mt-3 d-flex gap-3">
-            {links.map(({ id, name, path, color, variant }) => (
+            {links.map(({ id, name, path, color, variant}) => (
               <ActionButton
                 key={id}
                 text={name}
                 as={Link}
                 to={path}
-                className={`rounded-4 ${color}`}
+                className={`rounded-4 ${color} ${id === 2 && "btn-success text-white"}`}
                 variant={variant}
               />
             ))}
