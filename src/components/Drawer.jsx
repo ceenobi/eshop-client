@@ -36,7 +36,7 @@ export default function Drawer() {
             <div className="d-flex justify-content-between align-items-center">
               <NavLink
                 to="/search"
-                className={`profile fs-4 d-flex align-items-center text-black ${
+                className={`profile fs-4 d-flex align-items-center text-black w-100 ${
                   location.pathname === "/search" ? "fw-bold" : ""
                 }`}
                 onClick={handleClose}
@@ -67,7 +67,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/profile/${loggedInUser?.username}`}
-                  className={`profile fs-4 d-flex align-items-center text-black ${
+                  className={`profile fs-4 d-flex align-items-center text-black w-100 ${
                     location.pathname === "/profile" ? "fw-bold" : ""
                   }`}
                   onClick={handleClose}
@@ -80,7 +80,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/orders`}
-                  className={`profile fs-4 d-flex align-items-center text-black ${
+                  className={`profile fs-4 d-flex align-items-center text-black w-100 ${
                     location.pathname === "/orders" ? "fw-bold" : ""
                   }`}
                   onClick={handleClose}
@@ -94,7 +94,7 @@ export default function Drawer() {
                 <Texts
                   text="Logout"
                   size="1.3rem"
-                  className="fw-bold"
+                  className="fw-bold w-100"
                   onClick={handleLogout}
                 />
                 <IoIosLogOut size="24px" />
@@ -106,7 +106,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to="/login"
-                  className="fs-5 fw-medium text-black"
+                  className="fs-5 fw-medium text-black w-100"
                   onClick={handleClose}
                 >
                   Login

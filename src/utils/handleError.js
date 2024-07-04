@@ -5,14 +5,15 @@ const customId = "custom-id-yes";
 const handleError = (error) => {
   console.error(error);
   if (error?.message === "Network Error") {
-    return toast.error("Server is down", {
+    return toast.error("Server is down, pls wait a bit and reload", {
       toastId: customId,
     });
   }
   if (error?.response) {
     return toast.error(
       error.response.data?.message ||
-        error.response.data?.error ||  error.response.data?.errors[0]?.msg ||
+        error.response.data?.error ||
+        error.response.data?.errors[0]?.msg ||
         "An error occured",
       {
         toastId: customId,
