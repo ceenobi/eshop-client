@@ -36,7 +36,7 @@ export default function Drawer() {
             <div className="d-flex justify-content-between align-items-center">
               <NavLink
                 to="/search"
-                className={`profile fs-4 d-flex align-items-center ${
+                className={`profile fs-4 d-flex align-items-center text-black ${
                   location.pathname === "/search" ? "fw-bold" : ""
                 }`}
                 onClick={handleClose}
@@ -51,7 +51,7 @@ export default function Drawer() {
                 key={_id}
                 to={`/products/${name.toLowerCase()}`}
                 className={classnames({
-                  "profile d-flex flex-column fs-3 mb-4": true,
+                  "profile d-flex flex-column fs-3 mb-4 text-black": true,
                   "text-black fw-bold":
                     location.pathname === `/products/${name.toLowerCase()}`,
                 })}
@@ -67,7 +67,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/profile/${loggedInUser?.username}`}
-                  className={`profile fs-4 d-flex align-items-center ${
+                  className={`profile fs-4 d-flex align-items-center text-black ${
                     location.pathname === "/profile" ? "fw-bold" : ""
                   }`}
                   onClick={handleClose}
@@ -80,7 +80,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/orders`}
-                  className={`profile fs-4 d-flex align-items-center ${
+                  className={`profile fs-4 d-flex align-items-center text-black ${
                     location.pathname === "/orders" ? "fw-bold" : ""
                   }`}
                   onClick={handleClose}
@@ -105,19 +105,8 @@ export default function Drawer() {
             <div className="d-flex flex-column">
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
-                  to="/cart"
-                  className="fs-5 fw-medium"
-                  onClick={handleClose}
-                >
-                  Cart
-                </NavLink>
-                <CiShoppingCart size="24px" />
-              </div>
-              <hr />
-              <div className="d-flex justify-content-between align-items-center">
-                <NavLink
                   to="/login"
-                  className="fs-5 fw-medium"
+                  className="fs-5 fw-medium text-black"
                   onClick={handleClose}
                 >
                   Login

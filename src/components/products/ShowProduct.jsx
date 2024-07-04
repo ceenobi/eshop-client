@@ -43,7 +43,7 @@ export default function ShowProduct({
               ))}
             </div>
             {product?.image?.map((item, i) => (
-              <div key={i} className="d-none d-lg-block position-relative">
+              <div key={i} className="flex-grow-1 d-none d-lg-block position-relative">
                 {i === active && (
                   <>
                     <LazyLoadImage
