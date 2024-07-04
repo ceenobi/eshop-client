@@ -31,11 +31,12 @@ main {
 
 a {
   color: inherit !important;
+  transition: 0.3 ease-in-out !important;
 }
 
 .profile:hover {
   color: var(--bg-blue-400) !important;
-  transition: 0.2 ease-in-out !important;
+  transition: 0.3 ease-in-out !important;
 }
 
 

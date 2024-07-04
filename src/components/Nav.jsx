@@ -30,6 +30,7 @@ export default function Nav() {
             key={_id}
             to={`/products/${name.toLowerCase()}`}
             className={classnames({
+              "profile": true,
               "text-black fw-bold":
                 location.pathname === `/products/${name.toLowerCase()}`,
             })}

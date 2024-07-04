@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
 import { IoLogOut, IoMenu } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
-import { CiShoppingCart } from "react-icons/ci";
+import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { NavLink, useLocation } from "react-router-dom";
 import Texts from "./Texts";
 import classnames from "classnames";
@@ -27,12 +27,25 @@ export default function Drawer() {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="mb-4">
+            <div className="d-flex justify-content-between align-items-center">
+              <NavLink
+                to="/search"
+                className={`profile fs-4 d-flex align-items-center ${
+                  location.pathname === "/search" ? "fw-bold" : ""
+                }`}
+                onClick={handleClose}
+              >
+                Search
+              </NavLink>
+              <CiSearch size="24px" />
+            </div>
+            <hr />
             {categories.map(({ _id, name }) => (
               <NavLink
                 key={_id}
                 to={`/products/${name.toLowerCase()}`}
                 className={classnames({
-                  "d-flex flex-column fs-3 mb-4": true,
+                  "profile d-flex flex-column fs-3 mb-4": true,
                   "text-black fw-bold":
                     location.pathname === `/products/${name.toLowerCase()}`,
                 })}
@@ -48,7 +61,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/profile/${loggedInUser?.username}`}
-                  className={`profile fs-3 d-flex align-items-center ${
+                  className={`profile fs-4 d-flex align-items-center ${
                     location.pathname === "/profile" ? "fw-bold" : ""
                   }`}
                   onClick={handleClose}
@@ -61,7 +74,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/orders`}
-                  className={`profile fs-3 d-flex align-items-center ${
+                  className={`profile fs-4 d-flex align-items-center ${
                     location.pathname === "/orders" ? "fw-bold" : ""
                   }`}
                   onClick={handleClose}
@@ -71,17 +84,15 @@ export default function Drawer() {
                 <CiShoppingCart size="24px" />
               </div>
               <hr />
-              <Texts
-                text={
-                  <>
-                    <IoLogOut className="me-1" />
-                    Logout
-                  </>
-                }
-                size="1.3rem"
-                className="fw-bold"
-                onClick={logout}
-              />
+              <div className="d-flex justify-content-between align-items-center">
+                <Texts
+                  text={<>Logout</>}
+                  size="1.3rem"
+                  className="fw-bold"
+                  onClick={logout}
+                />
+                <IoLogOut size="24px" />
+              </div>
             </>
           )}
           {!loggedInUser && (
@@ -100,7 +111,7 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to="/login"
-                  className="fs-5 fw-medium mb-4"
+                  className="fs-5 fw-medium"
                   onClick={handleClose}
                 >
                   Login
