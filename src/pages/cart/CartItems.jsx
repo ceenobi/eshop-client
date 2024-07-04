@@ -174,7 +174,7 @@ export default function CartItems() {
             as={Link}
             to="/products/heels"
             size="lg"
-            style={{ width: "200px" }}
+            style={{ width: "200px", backgroundColor: "var(--bg-blue-400)" }}
             className="text-white"
           />
         </div>
