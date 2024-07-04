@@ -1,10 +1,11 @@
 import { useStore } from "@/hooks";
 import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
-import { IoLogOut, IoMenu } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { NavLink, useLocation } from "react-router-dom";
+import { IoIosLogOut } from "react-icons/io";
 import Texts from "./Texts";
 import classnames from "classnames";
 
@@ -15,6 +16,11 @@ export default function Drawer() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleLogout = () => {
+    logout();
+    handleClose();
+  };
 
   return (
     <>
@@ -86,12 +92,12 @@ export default function Drawer() {
               <hr />
               <div className="d-flex justify-content-between align-items-center">
                 <Texts
-                  text={<>Logout</>}
+                  text="Logout"
                   size="1.3rem"
                   className="fw-bold"
-                  onClick={logout}
+                  onClick={handleLogout}
                 />
-                <IoLogOut size="24px" />
+                <IoIosLogOut size="24px" />
               </div>
             </>
           )}

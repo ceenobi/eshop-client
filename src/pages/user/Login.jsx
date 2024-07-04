@@ -22,7 +22,7 @@ export default function Login() {
   } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.search ? location.search.split("=")[1] : "/";
+  const from = location.state?.from?.pathname || "/";
 
   const handleHide = () => {
     setReveal((prevReveal) => !prevReveal);

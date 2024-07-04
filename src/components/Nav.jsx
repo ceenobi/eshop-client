@@ -1,11 +1,11 @@
 import { useStore } from "@/hooks";
-import { IoLogOut } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { Badge, Container, Dropdown } from "react-bootstrap";
 import { GiWingfoot } from "react-icons/gi";
 import { GoPerson } from "react-icons/go";
+import { IoIosLogOut } from "react-icons/io";
 import Drawer from "./Drawer";
 
 export default function Nav() {
@@ -30,7 +30,7 @@ export default function Nav() {
             key={_id}
             to={`/products/${name.toLowerCase()}`}
             className={classnames({
-              "profile": true,
+              profile: true,
               "text-black fw-bold":
                 location.pathname === `/products/${name.toLowerCase()}`,
             })}
@@ -63,8 +63,8 @@ export default function Nav() {
                 <CiShoppingCart className="me-1" />
                 Orders
               </Dropdown.Item>
-              <Dropdown.ItemText onClick={logout} className="cursor">
-                <IoLogOut className="me-1" /> Logout
+              <Dropdown.ItemText onClick={logout} className="cursor fw-bold">
+                <IoIosLogOut className="me-1" /> Logout
               </Dropdown.ItemText>
             </Dropdown.Menu>
           </Dropdown>
