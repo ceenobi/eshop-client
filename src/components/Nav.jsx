@@ -13,20 +13,23 @@ export default function Nav() {
   const location = useLocation();
 
   return (
-    <Container fluid="xl" className="p-3 d-flex align-items-center">
+    <Container
+      fluid="xl"
+      className="p-3 d-flex align-items-center justify-content-between justify-content-md-start"
+    >
+      <Drawer />
       <NavLink to="/" className="me-4">
         <div className="d-flex align-items-center gap-1">
           <GiWingfoot size="30px" color="#3f3f46" />
           <span className="fs-5 fw-medium"> Footsy</span>
         </div>
       </NavLink>
-      <div className="mx-lg-5 d-flex align-items-center gap-4 flex-grow-1">
+      <div className="mx-0 mx-lg-5 d-none d-md-flex align-items-center gap-4 flex-md-grow-1">
         {categories.map(({ _id, name }) => (
           <NavLink
             key={_id}
             to={`/products/${name.toLowerCase()}`}
             className={classnames({
-              " d-none d-md-flex": true,
               "text-black fw-bold":
                 location.pathname === `/products/${name.toLowerCase()}`,
             })}
@@ -36,10 +39,9 @@ export default function Nav() {
         ))}
       </div>
       <div className="d-flex align-items-center gap-4">
-        <NavLink to="/search">
-          <CiSearch size="22px" />
+        <NavLink to="/search" className="d-none d-md-block">
+          <CiSearch size="24px" />
         </NavLink>
-
         {loggedInUser ? (
           <Dropdown className="d-none d-md-block">
             <Dropdown.Toggle
@@ -67,11 +69,11 @@ export default function Nav() {
           </Dropdown>
         ) : (
           <NavLink to="/login" className="d-none d-md-block">
-            <GoPerson size="22px" />
+            <GoPerson size="24px" />
           </NavLink>
         )}
         <NavLink to="/cart" className="position-relative">
-          <CiShoppingCart size="22px" />
+          <CiShoppingCart size="24px" />
           {cartQuantity > 0 && (
             <Badge
               pill
@@ -84,7 +86,6 @@ export default function Nav() {
           )}
         </NavLink>
       </div>
-      <Drawer />
     </Container>
   );
 }
