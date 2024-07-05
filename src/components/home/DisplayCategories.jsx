@@ -4,7 +4,7 @@ import Texts from "../Texts";
 
 export default function DisplayCategories({ categories }) {
   return (
-    <div className="mt-5 px-3 d-flex justify-content-md-center gap-3 gap-md-5 overflow-x-auto overflow-y-hidden">
+    <div className="mt-5 px-3 d-flex justify-content-md-center gap-3 gap-md-5 overflow-x-auto overflow-y-hidden scrollbody">
       {categories.map(({ _id, name, image }) => (
         <Link
           to={`/products/${name.toLowerCase()}`}
@@ -19,7 +19,10 @@ export default function DisplayCategories({ categories }) {
             height={150}
             className="object-fit-fill"
           />
-          <Texts text={name} className="mt-2 text-center fw-medium text-black" />
+          <Texts
+            text={name}
+            className="mt-2 text-center fw-medium text-black"
+          />
         </Link>
       ))}
     </div>

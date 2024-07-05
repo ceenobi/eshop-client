@@ -77,7 +77,7 @@ export default function ProductDetail() {
               {Array.from({ length: 4 }, (_, index) => (
                 <Skeleton
                   height="430px"
-                  width="300px"
+                  width="250px"
                   containerClassName="product-skeleton"
                   className="rounded-4"
                   key={index}

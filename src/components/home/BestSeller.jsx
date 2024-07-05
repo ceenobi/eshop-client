@@ -20,7 +20,7 @@ export default function BestSeller({ bestSellerProducts }) {
           {bestSellerProducts?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
-              className="cardBox position-relative rounded-4 border"
+              className="homeBox position-relative rounded-4 border bg-white"
             >
               <Link
                 to={`/products/${item.category.toLowerCase()}/${item.slug}`}
@@ -54,7 +54,7 @@ export default function BestSeller({ bestSellerProducts }) {
         {bestSellerProducts?.products?.map((item) => (
           <Link
             key={item._id}
-            className="cardBox position-relative rounded-4 border"
+            className="homeBox position-relative rounded-4 border bg-white"
             to={`/products/${item.category.toLowerCase()}/${item.slug}`}
           >
             <LazyLoadImage

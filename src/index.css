@@ -67,7 +67,8 @@ button:hover {
   min-height: 370px;
 }
 
-.cardBox:hover {
+.cardBox:hover,
+.homeBox:hover {
   transition: 0.3s ease-in;
   filter: brightness(80%);
 }
