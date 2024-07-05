@@ -29,7 +29,7 @@ export default function ProductCard({ product }) {
           src={image[0]}
           alt={name}
           width="100%"
-          height={270}
+          height={260}
           className="object-fit-cover rounded-top-3"
         />
       </Link>
@@ -45,7 +45,7 @@ export default function ProductCard({ product }) {
         <Texts
           text={formatCurrency(price)}
           size="1rem"
-          color="var(--bg-zinc-700)"
+          color="var(--bg-zinc-600)"
           className="flex-grow-1 text-start"
         />
         <IoCartSharp

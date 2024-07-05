@@ -63,7 +63,7 @@ button:hover {
 
 .cardBox {
   transition: 0.3s ease-in;
-  min-width: 170px;
+  min-width: 165px;
   min-height: 370px;
 }
 
