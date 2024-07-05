@@ -29,22 +29,22 @@ export default function ProductCard({ product }) {
           src={image[0]}
           alt={name}
           width="100%"
-          height={260}
+          height={220}
           className="object-fit-cover rounded-top-3"
         />
       </Link>
       <Link to={`/products/${category.toLowerCase()}/${slug}`}>
         <Texts
-          text={name?.length > 40 ? name?.slice(0, 40) + "..." : name}
+          text={name?.length > 40 ? name?.slice(0, 40) +"..." : name}
           className="px-1 my-2 mb-0 fw-semibold text-start"
-          size="0.9rem"
+          size="0.8rem"
           color="var(--bg-zinc-700)"
         />
       </Link>
       <div className="px-1 mt-2 d-flex">
         <Texts
           text={formatCurrency(price)}
-          size="1rem"
+          size="0.9rem"
           color="var(--bg-zinc-600)"
           className="flex-grow-1 text-start"
         />

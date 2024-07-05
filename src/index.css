@@ -63,8 +63,8 @@ button:hover {
 
 .cardBox {
   transition: 0.3s ease-in;
-  min-width: 165px;
-  min-height: 370px;
+  min-width: 160px;
+  min-height: 320px;
 }
 
 .cardBox:hover,
@@ -98,4 +98,15 @@ button:hover {
 
 .product-skeleton {
   border-radius: 10px !important;
+}
+
+@media (min-width: 430px) {
+  .cardBox {
+    min-width: 165px;
+  }
+}
+@media (min-width: 768px) {
+  .cardBox {
+    min-width: 170px;
+  }
 }

@@ -8,7 +8,7 @@ export default function ProductsLayout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    location.pathname === "/products" && navigate("/");
+    location.pathname === "/products" && navigate("/products/heels");
   }, [location.pathname, navigate]);
 
   return (

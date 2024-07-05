@@ -1,13 +1,10 @@
-import { lazy, Suspense } from "react";
 import { productService } from "@/api";
-import { Headings, Loader, Paginate, Texts } from "@/components";
+import { Headings, Paginate, Texts, ProductCard } from "@/components";
 import { useFetch, useStore, useTitle } from "@/hooks";
 import { useMemo } from "react";
 import { Alert, Col, Image, Row } from "react-bootstrap";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-
-const ProductCard = lazy(() => import("@/components/products/ProductCard"));
 
 export default function Products() {
   const [searchParams] = useSearchParams();
@@ -109,15 +106,13 @@ export default function Products() {
         </Row>
       )}
       {!error && !loading && products?.length > 0 && (
-        <Suspense fallback={<Loader />}>
-          <Row className="my-5">
-            {products?.map((product) => (
-              <Col xs={6} md={4} lg={3} key={product._id}>
-                <ProductCard product={product} />
-              </Col>
-            ))}
-          </Row>
-        </Suspense>
+        <Row className="my-5">
+          {products?.map((product) => (
+            <Col xs={6} md={4} lg={3} key={product._id}>
+              <ProductCard product={product} />
+            </Col>
+          ))}
+        </Row>
       )}
       {!error && products?.length === 0 && (
         <Texts text="No products to display" size="1.3rem" />

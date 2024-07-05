@@ -45,7 +45,11 @@ export default function AppRoutes() {
           children: [
             {
               path: ":categoryName",
-              element: <CategoryProducts />,
+              element: (
+                <Suspense fallback={<Loader />}>
+                  <CategoryProducts />
+                </Suspense>
+              ),
             },
             {
               path: ":categoryName/:slug",

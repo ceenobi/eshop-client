@@ -57,7 +57,7 @@ export default function ShowProduct({
                         effect="blur"
                         src={item}
                         alt={product?.name}
-                        width={500}
+                        width={450}
                         height={500}
                       />
 
@@ -120,7 +120,7 @@ export default function ShowProduct({
               onClick={() => addToCart(product)}
               className="w-100 border-0 py-2"
               style={{ backgroundColor: "var(--bg-blue-400" }}
-            disabled={!product.inStock}
+              disabled={!product.inStock}
             />
 
             <Texts
