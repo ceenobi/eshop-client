@@ -98,7 +98,7 @@ export default function Products() {
       {loading && (
         <Row className="my-5">
           {Array.from({ length: 4 }, (_, index) => (
-            <Col md={4} lg={3} key={index}>
+            <Col xs={6} md={4} lg={3} key={index} className="mb-3">
               <Skeleton
                 height="320px"
                 containerClassName="product-skeleton"
@@ -112,7 +112,7 @@ export default function Products() {
         <Suspense fallback={<Loader />}>
           <Row className="my-5">
             {products?.map((product) => (
-              <Col md={4} lg={3} key={product._id}>
+              <Col xs={6} md={4} lg={3} key={product._id}>
                 <ProductCard product={product} />
               </Col>
             ))}

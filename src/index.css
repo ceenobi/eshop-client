@@ -30,7 +30,6 @@ main {
 }
 
 a {
-  /* color: inherit !important; */
   transition: 0.3 ease-in-out !important;
 }
 
@@ -62,8 +61,10 @@ button:hover {
   display: none;
 }
 
-.cardBox * {
+.cardBox {
   transition: 0.3s ease-in;
+  min-width: 170px;
+  min-height: 370px;
 }
 
 .cardBox:hover {

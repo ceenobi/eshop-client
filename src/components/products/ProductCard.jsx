@@ -5,10 +5,11 @@ import { formatCurrency } from "@/utils";
 import { IoCartSharp } from "react-icons/io5";
 import { useStore } from "@/hooks";
 import { toast } from "react-toastify";
+import { Badge } from "react-bootstrap";
 
 export default function ProductCard({ product }) {
   const { increaseCartQuantity } = useStore();
-  const { slug, category, image, name, price } = product;
+  const { slug, category, image, name, price, inStock } = product;
 
   const addToCart = (product) => {
     increaseCartQuantity(product);
@@ -16,31 +17,41 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="cardBox mb-4" style={{ minWidth: "260px" }}>
+    <div className="cardBox bg-white rounded-3 border mb-4 position-relative">
+      {!inStock && (
+        <Badge bg="secondary" className="position-absolute top-0 m-3 z-3">
+          Out of stock
+        </Badge>
+      )}
       <Link to={`/products/${category.toLowerCase()}/${slug}`}>
         <LazyLoadImage
           effect="blur"
           src={image[0]}
           alt={name}
-          width={"100%"}
-          height={300}
-          className="w-100 h-100 object-fit-cover rounded-3 border"
+          width="100%"
+          height={270}
+          className="object-fit-cover rounded-top-3"
         />
       </Link>
       <Link to={`/products/${category.toLowerCase()}/${slug}`}>
         <Texts
-          text={name}
-          className="my-2 fw-semibold text-start"
+          text={name?.length > 40 ? name?.slice(0, 40) + "..." : name}
+          className="px-1 my-2 mb-0 fw-semibold text-start"
           size="0.9rem"
           color="var(--bg-zinc-700)"
         />
       </Link>
-      <div className="mt-2 d-flex justify-content-between">
-        <Texts text={formatCurrency(price)} size="0.9rem" />
+      <div className="px-1 mt-2 d-flex">
+        <Texts
+          text={formatCurrency(price)}
+          size="1rem"
+          color="var(--bg-zinc-700)"
+          className="flex-grow-1 text-start"
+        />
         <IoCartSharp
           size="22px"
           onClick={() => addToCart(product)}
-          className="cursor"
+          className="cursor d-none d-lg-block"
           title="Add item to cart"
           color="#3f3f46"
         />

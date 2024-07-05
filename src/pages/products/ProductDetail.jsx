@@ -65,7 +65,7 @@ export default function ProductDetail() {
         </Suspense>
       )}
       <div style={{ marginTop: "6rem" }}>
-        <Headings text="You May Also Like" extra="mb-4" size="1.5rem" />
+        <Headings text="You may also like" extra="mb-4" size="1.4rem" />
         {err && (
           <Alert variant="danger" className="mt-5">
             {err?.response?.data?.error || err.message}
