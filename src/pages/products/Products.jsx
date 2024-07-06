@@ -114,7 +114,7 @@ export default function Products() {
           ))}
         </Row>
       )}
-      {!error && products?.length === 0 && (
+      {!error && !loading && products?.length === 0 && (
         <Texts text="No products to display" size="1.3rem" />
       )}
       <Paginate

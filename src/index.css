@@ -2,6 +2,9 @@
   font-family: 'Rubik Variable', sans-serif;
   text-decoration: none !important;
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
@@ -22,11 +25,7 @@
 body {
   min-width: 320px;
   min-height: 100vh;
-}
-
-main {
   background-color: var(--bg-gray-100);
-  min-height: 100vh;
 }
 
 a {
@@ -63,8 +62,8 @@ button:hover {
 
 .cardBox {
   transition: 0.3s ease-in;
-  min-width: 160px;
-  min-height: 320px;
+  min-width: 130px;
+  height: 310px;
 }
 
 .cardBox:hover,
@@ -100,11 +99,18 @@ button:hover {
   border-radius: 10px !important;
 }
 
+@media (min-width: 375px) {
+  .cardBox {
+    min-width: 150px;
+  }
+}
+
 @media (min-width: 430px) {
   .cardBox {
     min-width: 165px;
   }
 }
+
 @media (min-width: 768px) {
   .cardBox {
     min-width: 170px;

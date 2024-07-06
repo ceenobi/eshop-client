@@ -9,7 +9,7 @@ function App() {
         position="top-right"
         transition={Bounce}
         theme="colored"
-        className="text-lowercase"
+        className="text-capitalize"
       />
       <AppRoutes />
     </StoreProvider>

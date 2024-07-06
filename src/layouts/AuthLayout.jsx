@@ -6,7 +6,7 @@ import { Texts } from "@/components";
 
 export default function AuthLayout({ children, caption }) {
   return (
-    <div className={`${styles.customBg}`}>
+    <main className={`${styles.customBg}`}>
       <Container fluid="xl" className="px-3 py-3 py-lg-5 min-vh-100">
         <div className="d-flex flex-column justify-content-center align-items-center">
           <Link to="/">
@@ -23,6 +23,6 @@ export default function AuthLayout({ children, caption }) {
           </div>
         </div>
       </Container>
-    </div>
+    </main>
   );
 }

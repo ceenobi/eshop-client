@@ -76,7 +76,7 @@ export default function ProductDetail() {
             <div className="d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
               {Array.from({ length: 4 }, (_, index) => (
                 <Skeleton
-                  height="430px"
+                  height="300px"
                   width="250px"
                   containerClassName="product-skeleton"
                   className="rounded-4"
