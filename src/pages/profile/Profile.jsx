@@ -78,37 +78,34 @@ export default function Profile() {
           <Col md={7} lg={5} className="mb-4">
             <div className="bg-light border rounded-4 shadow-sm p-3">
               <Texts text="Account Overview" className="fw-bold" />
-              <Row>
-                <Col xs={6}>
+              <div className="d-flex flex-wrap justify-content-between">
+                <div>
                   <Texts
                     text="Username"
                     className="text-uppercase fw-medium mb-1"
                   />
                   <Texts text={loggedInUser.username} />
-                </Col>
-                <Col xs={6}>
+                </div>
+                <div>
                   <Texts
                     text="Email"
                     className="text-uppercase fw-medium mb-1"
                   />
                   <Texts text={loggedInUser.email} color="var(--bg-zinc-700)" />
-                </Col>
-              </Row>
+                </div>
+              </div>
               <hr />
-              <Row>
-                <Col xs={6}>
-                  <Texts
-                    text="Date registered:"
-                    className="text-uppercase fw-medium mb-1"
-                  />
-                </Col>
-                <Col xs={6}>
-                  <Texts
-                    text={formatDate(loggedInUser.createdAt)}
-                    color="var(--bg-zinc-700)"
-                  />
-                </Col>
-              </Row>
+              <div className="d-flex flex-wrap justify-content-between">
+                <Texts
+                  text="Date registered:"
+                  className="text-uppercase fw-medium mb-1"
+                />
+
+                <Texts
+                  text={formatDate(loggedInUser.createdAt)}
+                  color="var(--bg-zinc-700)"
+                />
+              </div>
             </div>
           </Col>
           <Col md={3} className="mb-4">

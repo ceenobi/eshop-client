@@ -66,12 +66,11 @@ export default function ShopWithUs() {
             <SwiperSlide
               key={id}
               className="d-flex align-items-center"
-              // style={{ height: "250px" }}
             >
               <Card
                 style={{ minWidth: "20rem", height: "200px" }}
                 key={id}
-                className="rounded-3 shadow-sm border-1 mx-3"
+                className="bg-white rounded-3 shadow-sm border-1 mx-3"
               >
                 <Card.Body>
                   <Card.Title>
@@ -93,7 +92,7 @@ export default function ShopWithUs() {
           <Card
             style={{ minWidth: "20rem", height: "200px" }}
             key={id}
-            className="rounded-3 shadow-sm border-1"
+            className="bg-white rounded-3 shadow-sm border-1"
           >
             <Card.Body>
               <Card.Title>

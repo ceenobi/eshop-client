@@ -328,6 +328,7 @@ export default function OrderDetails() {
           <ActionButton
             text="DELETE ORDER"
             pending={isDeleting}
+            disabled={isDeleting}
             className="border-0 p-2"
             style={{
               fontSize: "14px",
