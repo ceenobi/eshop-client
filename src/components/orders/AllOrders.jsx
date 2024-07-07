@@ -80,7 +80,7 @@ export default function AllOrders({
                 width: "fit-content",
                 backgroundColor: "var(--bg-blue-400)",
               }}
-            />
+            />         
           </Col>
         </Row>
       </div>

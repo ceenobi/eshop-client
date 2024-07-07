@@ -46,7 +46,7 @@ export default function Drawer() {
               <CiSearch size="24px" />
             </div>
             <hr />
-            {categories.map(({ _id, name }) => (
+            {categories?.map(({ _id, name }) => (
               <NavLink
                 key={_id}
                 to={`/products/${name.toLowerCase()}`}

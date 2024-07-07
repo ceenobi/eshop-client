@@ -33,10 +33,19 @@ const updatePaymentInfo = (orderId, isPaid, token) => {
   });
 };
 
+const cancelOrder = (orderId, token) => {
+  return http.delete(`/order/${merchantCode}/cancel/${orderId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export default {
   checkoutSummary,
   createOrder,
   getAllClientOrders,
   getASingleOrder,
   updatePaymentInfo,
+  cancelOrder,
 };

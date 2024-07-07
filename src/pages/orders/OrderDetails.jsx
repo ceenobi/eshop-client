@@ -18,9 +18,12 @@ import { SiPicpay } from "react-icons/si";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import Skeleton from "react-loading-skeleton";
+import { toast } from "react-toastify";
 
 export default function OrderDetails() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showCancelOrderModal, setShowCancelOrderModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { token } = useStore();
   const { orderId } = useParams();
   const { data, error, setData, loading } = useFetch(
@@ -40,6 +43,16 @@ export default function OrderDetails() {
       setShowSuccessModal(true);
       setData(data.updatedOrder);
     }
+  });
+
+  const deleteOrder = tryCatchFn(async () => {
+    setIsDeleting(true);
+    const res = await orderService.cancelOrder(orderId, token);
+    if (res.status === 200) {
+      toast.success(res.data.msg);
+      window.location.replace("/orders");
+    }
+    setIsDeleting(false);
   });
 
   return (
@@ -206,7 +219,7 @@ export default function OrderDetails() {
         </Col>
         <Col md={6} lg={5}>
           {!order.isPaid ? (
-            <div className="mt-4 bg-light shadow-sm rounded-3 p-3 border">
+            <div className="mt-4 bg-light shadow-sm rounded-3 p-3 border mb-3">
               <Texts
                 text="Payment method"
                 size="1rem"
@@ -248,7 +261,7 @@ export default function OrderDetails() {
               )}
             </div>
           ) : (
-            <div className="mt-4 text-center bg-light shadow-sm rounded-3 p-3 border">
+            <div className="mt-4 text-center bg-light shadow-sm rounded-3 p-3 border mb-3">
               <FaMoneyBillTransfer size="40px" color="green" />
               <Texts
                 text="Your payment was received 😎"
@@ -256,6 +269,19 @@ export default function OrderDetails() {
                 className="fw-semibold text-center mb-0"
               />
               <small>Mode: {order.paymentMethod}</small>
+            </div>
+          )}
+          {!order.isPaid && (
+            <div className="text-end">
+              <ActionButton
+                text="Cancel Order"
+                type="button"
+                variant="danger"
+                style={{
+                  width: "fit-content",
+                }}
+                onClick={() => setShowCancelOrderModal(true)}
+              />
             </div>
           )}
         </Col>
@@ -278,6 +304,37 @@ export default function OrderDetails() {
             text="Close"
             variant="success"
             onClick={() => setShowSuccessModal(false)}
+          />
+        </div>
+      </ModalView>
+      <ModalView
+        show={showCancelOrderModal}
+        handleClose={() => setShowCancelOrderModal(false)}
+        title="Cancel order"
+        backdrop="static"
+      >
+        <Texts
+          text="You are about to permanently delete this order."
+          className="fw-bold"
+        />
+        <Texts text="Deleting this order is permanent and cannot be reversed. Are you sure?" />
+        <div className="d-flex justify-content-end align-items-center gap-3">
+          <Texts
+            text="Cancel"
+            className="fw-bold cursor mt-3"
+            role="button"
+            onClick={() => setShowCancelOrderModal(false)}
+          />
+          <ActionButton
+            text="DELETE ORDER"
+            pending={isDeleting}
+            className="border-0 p-2"
+            style={{
+              fontSize: "14px",
+              width: "170px",
+              backgroundColor: "var(--bg-zinc-700)",
+            }}
+            onClick={deleteOrder}
           />
         </div>
       </ModalView>
