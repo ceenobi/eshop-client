@@ -22,7 +22,7 @@ export default function Register() {
   } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.search ? location.search.split("=")[1] : "/";
+  const from = location.state?.from || "/";
 
   const handleHide = () => {
     setReveal((prevReveal) => !prevReveal);

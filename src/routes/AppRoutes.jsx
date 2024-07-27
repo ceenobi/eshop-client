@@ -55,11 +55,11 @@ export default function AppRoutes() {
               path: ":categoryName/:slug",
               element: <ProductDetail />,
             },
+            {
+              path: "search",
+              element: <Search />,
+            },
           ],
-        },
-        {
-          path: "search",
-          element: <Search />,
         },
         {
           path: "cart",

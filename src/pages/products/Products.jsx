@@ -93,7 +93,7 @@ export default function Products() {
         </Alert>
       )}
       {loading && (
-        <Row className="my-5">
+        <Row className="my-4">
           {Array.from({ length: 4 }, (_, index) => (
             <Col xs={6} md={4} lg={3} key={index} className="mb-3">
               <Skeleton
@@ -106,7 +106,7 @@ export default function Products() {
         </Row>
       )}
       {!error && !loading && products?.length > 0 && (
-        <Row className="my-5">
+        <Row className="mt-4">
           {products?.map((product) => (
             <Col xs={6} md={4} lg={3} key={product._id}>
               <ProductCard product={product} />

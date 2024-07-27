@@ -35,9 +35,9 @@ export default function Drawer() {
           <div className="mb-4">
             <div className="d-flex justify-content-between align-items-center">
               <NavLink
-                to="/search"
+                to="/products/search"
                 className={`profile fs-4 d-flex align-items-center text-black w-100 ${
-                  location.pathname === "/search" ? "fw-bold" : ""
+                  location.pathname === "/products/search" ? "fw-bold" : ""
                 }`}
                 onClick={handleClose}
               >

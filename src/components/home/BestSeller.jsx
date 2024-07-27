@@ -54,7 +54,7 @@ export default function BestSeller({ bestSellerProducts }) {
         {bestSellerProducts?.products?.map((item) => (
           <Link
             key={item._id}
-            className="homeBox position-relative rounded-4 border bg-white shadow-sm"
+            className="homeBox position-relative rounded-4 border bg-white shadow-smnnnnn"
             to={`/products/${item.category.toLowerCase()}/${item.slug}`}
           >
             <LazyLoadImage

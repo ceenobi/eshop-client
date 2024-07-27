@@ -22,7 +22,7 @@ export default function RecommendProducts({ recommended }) {
         ))}
       </Swiper>
 
-      <div className="d-lg-none mt-3 d-flex gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
+      <div className="d-lg-none mt-3 d-flex gap-3 overflow-x-scroll overflow-y-hidden scrollbody">
         <Suspense fallback={<Loader />}>
           {recommended.map((product) => (
             <ProductCard product={product} key={product._id} />

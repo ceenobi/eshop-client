@@ -2,7 +2,7 @@ import { productService } from "@/api";
 import { Loader, Texts } from "@/components";
 import { useFetch, useTitle } from "@/hooks";
 import { Suspense, useEffect, useMemo, useRef } from "react";
-import { Alert, Container, Form } from "react-bootstrap";
+import { Alert, Form } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
 import Skeleton from "react-loading-skeleton";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function Search() {
       } else {
         params.delete("query");
       }
-      navigate(`/search?${params.toString()}`);
+      navigate(`/products/search?${params.toString()}`);
     }
   }, 200);
 
@@ -50,7 +50,7 @@ export default function Search() {
   };
 
   return (
-    <Container fluid="xl" className="px-3 py-3 py-lg-5">
+    <>
       <div className="mt-4 d-flex justify-content-between align-items-center">
         <Texts
           text="Products"
@@ -85,7 +85,7 @@ export default function Search() {
           {error?.response?.data?.error || error.message}
         </Alert>
       )}
-      {loading && (
+      {loading && searchResult.length > 0 && (
         <div className="mt-3 d-flex gap-4 align-items-center flex-wrap">
           {Array.from({ length: 4 }, (_, index) => (
             <Skeleton
@@ -137,6 +137,6 @@ export default function Search() {
           className="mt-3 text-uppercase"
         />
       )}
-    </Container>
+    </>
   );
 }

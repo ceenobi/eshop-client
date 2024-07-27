@@ -41,7 +41,7 @@ export default function Nav() {
           ))}
         </div>
         <div className="d-flex align-items-center gap-4">
-          <NavLink to="/search" className="d-none d-md-block">
+          <NavLink to="/products/search" className="d-none d-md-block">
             <CiSearch size="24px" color="black" />
           </NavLink>
           {loggedInUser ? (
