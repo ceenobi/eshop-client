@@ -49,6 +49,7 @@ export default function ForgotPassword() {
           text="Verify Email"
           pending={isSubmitting}
           className="w-100 mt-3"
+          style={{ backgroundColor: "var(--bg-blue-400)" }}
           size="lg"
           disabled={isSubmitting}
           type="submit"

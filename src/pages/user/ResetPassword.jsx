@@ -92,6 +92,7 @@ export default function ResetPassword() {
           text="Reset"
           pending={isSubmitting}
           className="w-100 mt-2"
+          style={{ backgroundColor: "var(--bg-blue-400)" }}
           size="lg"
           disabled={isSubmitting}
           type="submit"

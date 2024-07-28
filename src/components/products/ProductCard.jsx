@@ -17,7 +17,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-between cardBox bg-white rounded-3 border mb-4 position-relative shadow-sm">
+    <div className="d-flex flex-column justify-content-between cardBox bg-white  mb-4 position-relative ">
       {!inStock && (
         <Badge bg="secondary" className="position-absolute top-0 m-3 z-3">
           Out of stock
@@ -31,7 +31,7 @@ export default function ProductCard({ product }) {
             alt={name}
             width="100%"
             height={210}
-            className="object-fit-cover rounded-top-3"
+            className="object-fit-cover"
           />
         </Link>
         <Link to={`/products/${category.toLowerCase()}/${slug}`}>
