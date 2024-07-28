@@ -18,7 +18,7 @@ export default function AuthLayout({ children, caption }) {
             className="fw-semibold mt-2"
             color="var(--bg-zinc-700)"
           />
-          <div className="shadow-sm p-3 text-center bg-transparent rounded-4 border">
+          <div className="shadow-sm p-3 text-center bg-white rounded-4 border">
             {children}
           </div>
         </div>

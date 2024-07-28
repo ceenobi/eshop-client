@@ -7,6 +7,7 @@ import { Navigation } from "swiper/modules";
 import { Container } from "react-bootstrap";
 
 export default function LatestProducts({ newProducts }) {
+
   return (
     <div className="mt-4">
       <Container className="px-3">
@@ -20,7 +21,7 @@ export default function LatestProducts({ newProducts }) {
           {newProducts?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
-              className="homeBox position-relative rounded-4 border bg-white shadow-sm"
+              className="bg-white homeBox position-relative rounded-4 shadow-sm"
             >
               <Link
                 to={`/products/${item.category.toLowerCase()}/${item.slug}`}
@@ -31,17 +32,24 @@ export default function LatestProducts({ newProducts }) {
                   alt={item.name}
                   width={"100%"}
                   height={450}
-                  className="w-100 h-100 rounded-4 mb-0"
+                  className="rounded-4 mb-0"
                 />
                 <div className="position-absolute top-0 p-4 text-start">
                   <Texts
+                    text={item.brand}
+                    color="var(--bg-zinc-600)"
+                    className="fw-bold text-uppercase"
+                    size="16px"
+                  />
+                  <Texts
                     text={item.name}
-                    className="fw-semibold text-black"
+                    className="fw-bold text-black"
                     size="1.1rem"
                   />
                   <Texts
                     text={formatCurrency(item.price)}
                     color="var(--bg-zinc-700)"
+                    size="16px"
                   />
                 </div>
               </Link>
@@ -54,7 +62,7 @@ export default function LatestProducts({ newProducts }) {
         {newProducts?.products?.map((item) => (
           <Link
             key={item._id}
-            className="homeBox position-relative rounded-4 border bg-white shadow-sm"
+            className="homeBox position-relative rounded-4 shadow-sm"
             to={`/products/${item.category.toLowerCase()}/${item.slug}`}
           >
             <LazyLoadImage
@@ -67,14 +75,21 @@ export default function LatestProducts({ newProducts }) {
             />
             <div className="position-absolute top-0 p-4">
               <Texts
+                text={item.brand}
+                color="var(--bg-zinc-600)"
+                className="fw-bold text-uppercase"
+                size="16px"
+              />
+              <Texts
                 text={item.name}
-                className="fw-semibold"
-                size="1.1rem"
+                className="fw-bold"
+                size="1rem"
                 color="var(--bg-zinc-700)"
               />
               <Texts
                 text={formatCurrency(item.price)}
                 color="var(--bg-zinc-700)"
+                size="16px"
               />
             </div>
           </Link>

@@ -1,7 +1,6 @@
-// import { useState } from "react";
+
 
 export default function useSlide(product, active, setActive) {
-  //   const [current, setCurrent] = useState(0);
   let imgLength = product;
 
   const nextSlide = () => {

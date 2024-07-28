@@ -94,12 +94,12 @@ export default function Home() {
           </Alert>
         )}
         {catLoad && (
-          <div className="mt-5 px-3 d-flex justify-content-center gap-5 overflow-x-auto overflow-y-hidden">
+          <div className="mt-5 px-3 d-flex justify-content-center gap-3 overflow-x-auto overflow-y-hidden">
             {Array.from({ length: 4 }, (_, index) => (
               <Skeleton
                 key={index}
-                height="200px"
-                width="200px"
+                height="150px"
+                width="190px"
                 containerClassName="product-skeleton"
                 className="rounded-4"
               />
@@ -128,12 +128,12 @@ export default function Home() {
           )}
         </div>
         {newLoad && (
-          <div className="mt-5 px-3 d-flex justify-content-center gap-5 overflow-x-auto overflow-y-hidden">
+          <div className="mt-5 px-3 d-flex justify-content-md-center gap-3 overflow-x-auto overflow-y-hidden">
             {Array.from({ length: 4 }, (_, index) => (
               <Skeleton
                 key={index}
-                height="350px"
-                width="265px"
+                height="400px"
+                width="300px"
                 containerClassName="product-skeleton"
                 className="rounded-4"
               />
@@ -180,12 +180,12 @@ export default function Home() {
           )}
         </div>
         {bestLoad && (
-          <div className="mt-5 px-3 d-flex justify-content-center gap-5 overflow-x-auto overflow-y-hidden">
+          <div className="mt-5 px-3 d-flex gap-3 overflow-x-auto overflow-y-hidden">
             {Array.from({ length: 4 }, (_, index) => (
               <Skeleton
                 key={index}
-                height="200px"
-                width="200px"
+                height="400px"
+                width="300px"
                 containerClassName="product-skeleton"
                 className="rounded-4"
               />

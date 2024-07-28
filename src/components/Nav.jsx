@@ -21,8 +21,8 @@ export default function Nav() {
         <Drawer />
         <NavLink to="/" className="me-4">
           <div className="d-flex align-items-center gap-1">
-            <GiWingfoot size="30px" color="#3f3f46" />
-            <span className="fs-5 fw-medium text-black"> Footsy</span>
+            <GiWingfoot size="20px" color="#3f3f46" />
+            <span className="fs-5 fw-medium text-black">Footsy</span>
           </div>
         </NavLink>
         <div className="mx-0 mx-lg-5 d-none d-md-flex align-items-center gap-4 flex-md-grow-1">
@@ -31,7 +31,7 @@ export default function Nav() {
               key={_id}
               to={`/products/${name.toLowerCase()}`}
               className={classnames({
-                "profile text-black": true,
+                "profile text-black small": true,
                 "text-black fw-bold":
                   location.pathname === `/products/${name.toLowerCase()}`,
               })}
@@ -42,7 +42,7 @@ export default function Nav() {
         </div>
         <div className="d-flex align-items-center gap-4">
           <NavLink to="/products/search" className="d-none d-md-block">
-            <CiSearch size="24px" color="black" />
+            <CiSearch size="20px" color="black" />
           </NavLink>
           {loggedInUser ? (
             <Dropdown className="d-none d-md-block">
@@ -71,11 +71,11 @@ export default function Nav() {
             </Dropdown>
           ) : (
             <NavLink to="/login" className="d-none d-md-block">
-              <GoPerson size="24px" color="black" />
+              <GoPerson size="20px" color="black" />
             </NavLink>
           )}
           <NavLink to="/cart" className="position-relative">
-            <CiShoppingCart size="24px" color="black" />
+            <CiShoppingCart size="20px" color="black" />
             {cartQuantity > 0 && (
               <Badge
                 pill

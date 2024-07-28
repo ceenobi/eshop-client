@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "@fontsource-variable/rubik";
+import '@fontsource-variable/open-sans';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -20,7 +20,7 @@ export default function BestSeller({ bestSellerProducts }) {
           {bestSellerProducts?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
-              className="homeBox position-relative rounded-4 border bg-white shadow-sm"
+              className="bg-white homeBox position-relative rounded-4 shadow-sm "
             >
               <Link
                 to={`/products/${item.category.toLowerCase()}/${item.slug}`}
@@ -31,9 +31,15 @@ export default function BestSeller({ bestSellerProducts }) {
                   alt={item.name}
                   width={"100%"}
                   height={450}
-                  className="w-100 h-100 rounded-4 mb-0"
+                  className="rounded-4 mb-0"
                 />
                 <div className="position-absolute top-0 p-4 text-start">
+                  <Texts
+                    text={item.brand}
+                    color="var(--bg-zinc-600)"
+                    className="fw-bold text-uppercase"
+                    size="16px"
+                  />
                   <Texts
                     text={item.name}
                     className="fw-semibold text-black"
@@ -42,6 +48,7 @@ export default function BestSeller({ bestSellerProducts }) {
                   <Texts
                     text={formatCurrency(item.price)}
                     color="var(--bg-zinc-700)"
+                    size="16px"
                   />
                 </div>
               </Link>
@@ -54,27 +61,35 @@ export default function BestSeller({ bestSellerProducts }) {
         {bestSellerProducts?.products?.map((item) => (
           <Link
             key={item._id}
-            className="homeBox position-relative rounded-4 border bg-white shadow-smnnnnn"
+            className="homeBox position-relative rounded-4 border bg-white shadow-sm"
             to={`/products/${item.category.toLowerCase()}/${item.slug}`}
+            style={{ height: "450px" }}
           >
             <LazyLoadImage
               effect="blur"
               src={item.image[1]}
               alt={item.name}
               width={300}
-              height={450}
-              className="w-100 h-100 object-fit-cover rounded-4 mb-0"
+              height={300}
+              className="w-100 h-100 rounded-4 mb-0"
             />
-            <div className="position-absolute top-0 p-4">
+            <div className="position-absolute bottom-0 p-4">
+              <Texts
+                text={item.brand}
+                color="var(--bg-zinc-600)"
+                className="fw-bold text-uppercase"
+                size="16px"
+              />
               <Texts
                 text={item.name}
                 className="fw-semibold"
-                size="1.1rem"
+                size="1rem"
                 color="var(--bg-zinc-700)"
               />
               <Texts
                 text={formatCurrency(item.price)}
                 color="var(--bg-zinc-700)"
+                size="16px"
               />
             </div>
           </Link>

@@ -9,5 +9,5 @@ export default function useScroll() {
       ? (current.scrollLeft -= 800)
       : (current.scrollLeft += 800);
   };
-  return { scroll, scrollRef};
+  return [scroll, scrollRef];
 }

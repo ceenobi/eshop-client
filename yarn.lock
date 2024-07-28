@@ -156,6 +156,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@fontsource-variable/open-sans@^5.0.29":
+  version "5.0.29"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/open-sans/-/open-sans-5.0.29.tgz#6cb8fcfded9570cf5129b2a70cd67b168576727b"
+  integrity sha512-p8T55iQwhErREcjY997t4ah9JKTyJNSBDDVfvVsWIQRGpA2fcTPk9rLue/Mkrr5/efkehxTSbT8JpTTRaFbM5A==
+
 "@fontsource-variable/rubik@^5.0.22":
   version "5.0.22"
   resolved "https://registry.yarnpkg.com/@fontsource-variable/rubik/-/rubik-5.0.22.tgz#6d6ac368453086279be98ad19ad90f6ee33f7268"

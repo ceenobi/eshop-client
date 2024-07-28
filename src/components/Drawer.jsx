@@ -24,7 +24,7 @@ export default function Drawer() {
 
   return (
     <>
-      <IoMenu onClick={handleShow} size="30px" className="d-md-none cursor" />
+      <IoMenu onClick={handleShow} size="20px" className="d-md-none cursor" />
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title className="fs-4 fw-semibold text-capitalize">
