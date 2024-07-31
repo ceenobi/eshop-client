@@ -9,10 +9,10 @@ import {
 } from "@/components";
 import styles from "../pages.module.css";
 import { Alert, Container, Image } from "react-bootstrap";
-import { categoryService, productService } from "@/api";
+import { productService } from "@/api";
 import { useMemo } from "react";
 import { useFetch, useTitle } from "@/hooks";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 
 const links = [
@@ -35,11 +35,11 @@ const links = [
 
 export default function Home() {
   useTitle("Footsy Home");
-  const {
-    data: cat,
-    error: errCat,
-    loading: catLoad,
-  } = useFetch(categoryService.getAllCategories);
+  // const {
+  //   data: cat,
+  //   error: errCat,
+  //   loading: catLoad,
+  // } = useFetch(categoryService.getAllCategories);
   const {
     data: newProductsData,
     error: errNew,
@@ -50,9 +50,16 @@ export default function Home() {
     error: errBest,
     loading: bestLoad,
   } = useFetch(productService.getBestSellerProducts);
-  const categories = useMemo(() => cat, [cat]);
+  // const categories = useMemo(() => cat, [cat]);
   const newProducts = useMemo(() => newProductsData, [newProductsData]);
   const bestSellerProducts = useMemo(() => bestSelling, [bestSelling]);
+  const categoriess = useLoaderData();
+  const navigation = useNavigation();
+  console.log(navigation);
+
+ if (navigation.state === "loading") {
+   return <h1>loading....</h1>;
+ }
 
   return (
     <div className="py-5">
@@ -88,7 +95,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {errCat && (
+        {/* {errCat && (
           <Alert variant="danger" className="mt-5">
             {errCat?.response?.data?.error || errCat?.message}
           </Alert>
@@ -105,9 +112,9 @@ export default function Home() {
               />
             ))}
           </div>
-        )}
+        )} */}
       </Container>
-      <DisplayCategories categories={categories} />
+      <DisplayCategories categories={categoriess}/>
       <Container fluid="xl" className="px-3">
         <div style={{ marginTop: "6rem" }}>
           <Headings

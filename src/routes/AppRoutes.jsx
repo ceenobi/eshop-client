@@ -18,6 +18,7 @@ import {
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedUser } from "./ProtectedRoutes";
 import { lazy, Suspense } from "react";
+import { categoryService } from "@/api";
 const PageNotFound = lazy(() => import("@/components/PageNotFound"));
 const Home = lazy(() => import("@/pages/home/Home"));
 const Orders = lazy(() => import("@/pages/orders/Orders"));
@@ -33,11 +34,16 @@ export default function AppRoutes() {
       children: [
         {
           path: "/",
+          index: true,
           element: (
             <Suspense fallback={<Loader />}>
               <Home />
             </Suspense>
           ),
+          loader: async () => {
+            const categories = await categoryService.getAllCategories(); 
+            return categories;
+          }, 
         },
         {
           path: "products",

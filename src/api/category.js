@@ -1,8 +1,12 @@
-import { http } from "@/utils";
+import { handleError, http } from "@/utils";
 const merchantCode = import.meta.env.VITE_TEEM_MERCHANT_CODE;
 
-const getAllCategories = () => {
-  return http.get(`/category/${merchantCode}/all`);
+const getAllCategories = async () => {
+  try {
+    return await http.get(`/category/${merchantCode}/all`);
+  } catch (error) {
+    handleError(error);
+  }
 };
 
 const getACategory = (categoryId) => {
