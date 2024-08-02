@@ -56,7 +56,7 @@ export default function ShowProduct({
                       <LazyLoadImage
                         effect="blur"
                         src={item}
-                        alt={product?.name}
+                        alt={product?.data?.name}
                         width={450}
                         height={500}
                       />
