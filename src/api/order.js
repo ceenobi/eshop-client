@@ -17,8 +17,8 @@ const createOrder = (orderSummary, token) => {
   });
 };
 
-const getAllClientOrders = (userId, page) => {
-  return http.get(`/order/${merchantCode}/all/${userId}?page=${page}`);
+const getAllClientOrders = async (userId, page = 1) => {
+  return await http.get(`/order/${merchantCode}/all/${userId}?page=${page}`);
 };
 
 const getASingleOrder = (orderId) => {

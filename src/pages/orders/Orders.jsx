@@ -1,35 +1,35 @@
-import { orderService } from "@/api";
 import { Headings, Paginate, Texts, AllOrders } from "@/components";
-import { useFetch, useStore, useTitle } from "@/hooks";
-import { useMemo } from "react";
-import { Alert, Col, Container, Row } from "react-bootstrap";
+import { useStore, useTitle } from "@/hooks";
+import { Container } from "react-bootstrap";
 import {
   useNavigate,
   useSearchParams,
   useLocation,
   Outlet,
+  useLoaderData,
 } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
-import Skeleton from "react-loading-skeleton";
+import { useEffect, useState } from "react";
 
 export default function Orders() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useLoaderData();
+  console.log(data);
   const [searchParams] = useSearchParams();
   const { itemsPerPage, loggedInUser } = useStore();
   useTitle(`${loggedInUser?.username} orders`);
   const navigate = useNavigate();
   const location = useLocation();
-  const page = searchParams.get("page") || 1;
-  const { data, error, loading } = useFetch(
-    orderService.getAllClientOrders,
-    loggedInUser?._id,
-    page
-  );
-  const yourOrders = useMemo(() => data, [data]);
+  const page = searchParams.get("page");
   const params = new URLSearchParams(searchParams);
   //paginate
-  const { totalPages, count, orders } = yourOrders;
-  const prevPage = itemsPerPage * (parseInt(page) - 1) > 0;
-  const nextPage = itemsPerPage * (parseInt(page) - 1) + itemsPerPage < count;
+  const { totalPages, count, orders } = data;
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+    setCurrentPage(pageParam ? parseInt(pageParam) : 1);
+  }, [searchParams]);
+  const prevPage = itemsPerPage * (currentPage - 1) > 0;
+  const nextPage = itemsPerPage * (currentPage - 1) + itemsPerPage < count;
   const firstPage = 1;
   const lastPage = Math.ceil(count / itemsPerPage);
 
@@ -55,25 +55,7 @@ export default function Orders() {
       {location.pathname === "/orders" ? (
         <>
           <Headings text="Orders" size="1.8rem" />
-          {error && (
-            <Alert variant="danger" className="mt-5">
-              {error?.response?.data?.error || error.message}
-            </Alert>
-          )}
-          {loading && (
-            <Row className="my-5">
-              {Array.from({ length: 3 }, (_, index) => (
-                <Col xs={12} key={index} className="mb-4">
-                  <Skeleton
-                    height="180px"
-                    containerClassName="product-skeleton"
-                    className="rounded-3"
-                  />
-                </Col>
-              ))}
-            </Row>
-          )}
-          {!error && !loading && orders && orders?.length > 0 && (
+          {orders && orders?.length > 0 && (
             <>
               {orders?.map((order) => (
                 <AllOrders key={order._id} {...order} />
@@ -91,7 +73,7 @@ export default function Orders() {
               />
             </>
           )}
-          {!error && !loading && orders && orders?.length === 0 && (
+          {orders && orders?.length === 0 && (
             <div className="mt-5 text-center">
               <CiShoppingCart size="50px" />
               <Texts

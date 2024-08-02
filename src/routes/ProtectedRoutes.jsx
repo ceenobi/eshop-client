@@ -1,19 +1,17 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
 
 export const ProtectedUser = ({ isAuth, children }) => {
   const location = useLocation();
 
   if (!isAuth) {
-    return (
-      <>
-        <Navigate to="/login" state={{ from: location }} replace />
-        {location.pathname === "/checkout" &&
-          toast.info("You are unathenticated", {
-            toastId: "warning",
-          })}
-      </>
-    );
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+  return children;
+};
+
+export const PublicRoutes = ({ isAuth, children }) => {
+  if (isAuth) {
+    return <Navigate to="/" replace />;
   }
   return children;
 };

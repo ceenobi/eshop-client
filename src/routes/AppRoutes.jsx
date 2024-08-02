@@ -1,6 +1,5 @@
 import { Error, Loader, OrderSummary } from "@/components";
 import { useStore } from "@/hooks";
-import { ProductsLayout, RootLayout } from "@/layouts";
 import {
   CartItems,
   Checkout,
@@ -13,32 +12,34 @@ import {
   Register,
   ResetPassword,
   Search,
+  Home,
+  CategoryProducts,
 } from "@/pages";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { ProtectedUser } from "./ProtectedRoutes";
+import { ProtectedUser, PublicRoutes } from "./ProtectedRoutes";
 import { lazy, Suspense } from "react";
-import { categoryService, productService } from "@/api";
+import { categoryService, orderService, productService } from "@/api";
 const PageNotFound = lazy(() => import("@/components/PageNotFound"));
-const Home = lazy(() => import("@/pages/home/Home"));
+const RootLayout = lazy(() => import("@/layouts/RootLayout"));
+const ProductsLayout = lazy(() => import("@/layouts/ProductsLayout"));
 const Orders = lazy(() => import("@/pages/orders/Orders"));
-const CategoryProducts = lazy(() => import("@/pages/products/Products"));
 
 export default function AppRoutes() {
-  const { token } = useStore();
+  const { token, loggedInUser } = useStore();
 
   const routes = [
     {
       path: "/",
       name: "Root",
-      element: <RootLayout />,
+      element: (
+        <Suspense fallback={<Loader />}>
+          <RootLayout />
+        </Suspense>
+      ),
       children: [
         {
           index: true,
-          element: (
-            <Suspense fallback={<Loader />}>
-              <Home />
-            </Suspense>
-          ),
+          element: <Home />,
           errorElement: <Error />,
           loader: async () => {
             const categories = await categoryService.getAllCategories();
@@ -49,15 +50,15 @@ export default function AppRoutes() {
         },
         {
           path: "products",
-          element: <ProductsLayout />,
+          element: (
+            <Suspense fallback={<Loader />}>
+              <ProductsLayout />{" "}
+            </Suspense>
+          ),
           children: [
             {
               path: ":categoryName",
-              element: (
-                <Suspense fallback={<Loader />}>
-                  <CategoryProducts />
-                </Suspense>
-              ),
+              element: <CategoryProducts />,
               errorElement: <Error />,
               loader: ({ params }) =>
                 productService.getProductsByCategory(params.categoryName),
@@ -109,6 +110,8 @@ export default function AppRoutes() {
               </ProtectedUser>
             </Suspense>
           ),
+          errorElement: <Error />,
+          loader: () => orderService.getAllClientOrders(loggedInUser?._id),
           children: [
             {
               path: ":orderId",
@@ -135,33 +138,33 @@ export default function AppRoutes() {
     {
       path: "/login",
       element: (
-        <ProtectedUser isAuth={!token}>
+        <PublicRoutes isAuth={token}>
           <Login />
-        </ProtectedUser>
+        </PublicRoutes>
       ),
     },
     {
       path: "/register",
       element: (
-        <ProtectedUser isAuth={!token}>
+        <PublicRoutes isAuth={token}>
           <Register />
-        </ProtectedUser>
+        </PublicRoutes>
       ),
     },
     {
       path: "/forgot-password",
       element: (
-        <ProtectedUser isAuth={!token}>
+        <PublicRoutes isAuth={token}>
           <ForgotPassword />
-        </ProtectedUser>
+        </PublicRoutes>
       ),
     },
     {
       path: "reset-password/:userId/:token",
       element: (
-        <ProtectedUser isAuth={!token}>
+        <PublicRoutes isAuth={token}>
           <ResetPassword />
-        </ProtectedUser>
+        </PublicRoutes>
       ),
     },
     {

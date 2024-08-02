@@ -1,8 +1,8 @@
 import { http } from "@/utils";
 const merchantCode = import.meta.env.VITE_TEEM_MERCHANT_CODE;
 
-const getAllProducts = (page = 1) => {
-  return http.get(`/product/${merchantCode}/all?page=${page}`);
+const getAllProducts = async(page = 1) => {
+  return await http.get(`/product/${merchantCode}/all?page=${page}`);
 };
 const getNewProducts = async (page = 1) => {
   return await http.get(`/product/${merchantCode}/get/new?page=${page}`);
@@ -18,7 +18,7 @@ const getAProduct = async (slug) => {
   return await http.get(`/product/${merchantCode}/get/${slug}`);
 };
 
-const getRecommendedProducts = async(slug) => {
+const getRecommendedProducts = async (slug) => {
   return await http.get(`/product/${merchantCode}/get/${slug}/recommended`);
 };
 
@@ -28,8 +28,8 @@ const getProductsByCategory = async (category, page = 1) => {
   );
 };
 
-const searchProducts = (query) => {
-  return http.get(`/product/${merchantCode}/search?q=${query}`);
+const searchProducts = async (query) => {
+  return await http.get(`/product/${merchantCode}/search?q=${query}`);
 };
 
 export default {

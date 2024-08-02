@@ -34,7 +34,7 @@ export const StoreProvider = ({ children }) => {
     }
   }
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   const increaseCartQuantity = (id) => {
     setCartItems((currItems) => {
