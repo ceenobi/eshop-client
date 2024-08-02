@@ -1,10 +1,12 @@
-import { productService } from "@/api";
 import { Headings, Paginate, Texts, ProductCard } from "@/components";
-import { useFetch, useStore, useTitle } from "@/hooks";
-import { useMemo } from "react";
-import { Alert, Col, Image, Row } from "react-bootstrap";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
+import { useStore, useTitle } from "@/hooks";
+import { Col, Image, Row } from "react-bootstrap";
+import {
+  useLoaderData,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 
 export default function Products() {
   const [searchParams] = useSearchParams();
@@ -12,16 +14,11 @@ export default function Products() {
   const { categoryName } = useParams();
   useTitle(`Products ${categoryName}`);
   const navigate = useNavigate();
+  const { data } = useLoaderData();
   const page = searchParams.get("page") || 1;
-  const { data, error, loading } = useFetch(
-    productService.getProductsByCategory,
-    categoryName,
-    page
-  );
-  const catProducts = useMemo(() => data, [data]);
   const params = new URLSearchParams(searchParams);
   //paginate
-  const { totalPages, count, products } = catProducts;
+  const { totalPages, count, products } = data;
   const prevPage = itemsPerPage * (parseInt(page) - 1) > 0;
   const nextPage = itemsPerPage * (parseInt(page) - 1) + itemsPerPage < count;
   const firstPage = 1;
@@ -87,12 +84,12 @@ export default function Products() {
         color="var(--bg-zinc-600)"
         size="1.5rem"
       />
-      {error && (
+      {/* {error && (
         <Alert variant="danger" className="mt-5">
           {error?.response?.data?.error || error.message}
         </Alert>
-      )}
-      {loading && (
+      )} */}
+      {/* {loading && (
         <Row className="my-4">
           {Array.from({ length: 4 }, (_, index) => (
             <Col xs={6} md={4} lg={3} key={index} className="mb-3">
@@ -104,8 +101,8 @@ export default function Products() {
             </Col>
           ))}
         </Row>
-      )}
-      {!error && !loading && products?.length > 0 && (
+      )} */}
+      {products?.length > 0 && (
         <Row className="mt-4">
           {products?.map((product) => (
             <Col xs={6} md={4} lg={3} key={product._id}>
@@ -114,7 +111,7 @@ export default function Products() {
           ))}
         </Row>
       )}
-      {!error && !loading && products?.length === 0 && (
+      {products?.length === 0 && (
         <Texts text="No products to display" size="1.3rem" />
       )}
       <Paginate

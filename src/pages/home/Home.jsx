@@ -8,12 +8,9 @@ import {
   BestSeller,
 } from "@/components";
 import styles from "../pages.module.css";
-import { Alert, Container, Image } from "react-bootstrap";
-import { productService } from "@/api";
-import { useMemo } from "react";
-import { useFetch, useTitle } from "@/hooks";
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
+import { Container, Image } from "react-bootstrap";
+import { useTitle } from "@/hooks";
+import { Link, useLoaderData } from "react-router-dom";
 
 const links = [
   {
@@ -29,42 +26,18 @@ const links = [
     name: "Profile",
     variant: "outline-primary",
     color: "text-primary",
-    border: "1px solid blue"
+    border: "1px solid blue",
   },
 ];
 
 export default function Home() {
   useTitle("Footsy Home");
-  // const {
-  //   data: cat,
-  //   error: errCat,
-  //   loading: catLoad,
-  // } = useFetch(categoryService.getAllCategories);
-  const {
-    data: newProductsData,
-    error: errNew,
-    loading: newLoad,
-  } = useFetch(productService.getNewProducts);
-  const {
-    data: bestSelling,
-    error: errBest,
-    loading: bestLoad,
-  } = useFetch(productService.getBestSellerProducts);
-  // const categories = useMemo(() => cat, [cat]);
-  const newProducts = useMemo(() => newProductsData, [newProductsData]);
-  const bestSellerProducts = useMemo(() => bestSelling, [bestSelling]);
-  const categoriess = useLoaderData();
-  const navigation = useNavigation();
-  console.log(navigation);
-
- if (navigation.state === "loading") {
-   return <h1>loading....</h1>;
- }
+  const homeData = useLoaderData();
 
   return (
     <div className="py-5">
-      <Container fluid="xl" className="px-3">
-        <div className="mt-lg-5 d-flex flex-wrap justify-content-between align-items-center">
+      <Container fluid="xl" className="px-0">
+        <div className="px-3 mt-lg-5 d-flex flex-wrap justify-content-between align-items-center">
           <Headings
             text={
               <>
@@ -95,27 +68,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* {errCat && (
-          <Alert variant="danger" className="mt-5">
-            {errCat?.response?.data?.error || errCat?.message}
-          </Alert>
-        )}
-        {catLoad && (
-          <div className="mt-5 px-3 d-flex justify-content-center gap-3 overflow-x-auto overflow-y-hidden">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Skeleton
-                key={index}
-                height="150px"
-                width="190px"
-                containerClassName="product-skeleton"
-                className="rounded-4"
-              />
-            ))}
-          </div>
-        )} */}
-      </Container>
-      <DisplayCategories categories={categoriess}/>
-      <Container fluid="xl" className="px-3">
+        <DisplayCategories categories={homeData.categories} />
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text={
@@ -125,31 +78,11 @@ export default function Home() {
               </>
             }
             color="var(--bg-zinc-600)"
-            extra={`${styles.heroAdjust} mb-4`}
+            extra={`${styles.heroAdjust} mb-4 px-3`}
             size="1.5rem"
           />
-          {errNew && (
-            <Alert variant="danger" className="mt-5">
-              {errNew?.response?.data?.error || errNew.message}
-            </Alert>
-          )}
+          <LatestProducts newProducts={homeData.newProducts} />
         </div>
-        {newLoad && (
-          <div className="mt-5 px-3 d-flex justify-content-md-center gap-3 overflow-x-auto overflow-y-hidden">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Skeleton
-                key={index}
-                height="400px"
-                width="300px"
-                containerClassName="product-skeleton"
-                className="rounded-4"
-              />
-            ))}
-          </div>
-        )}
-      </Container>
-      <LatestProducts newProducts={newProducts} />
-      <Container fluid="xl" className="px-3">
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text={
@@ -161,13 +94,11 @@ export default function Home() {
               </>
             }
             color="var(--bg-zinc-600)"
-            extra={styles.heroAdjust}
+            extra={`${styles.heroAdjust} px-3`}
             size="1.5rem"
           />
+          <ShopWithUs />
         </div>
-      </Container>
-      <ShopWithUs />
-      <Container fluid="xl" className="px-3">
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text={
@@ -177,32 +108,12 @@ export default function Home() {
               </>
             }
             color="var(--bg-zinc-600)"
-            extra={`${styles.heroAdjust} mb-4}`}
+            extra={`${styles.heroAdjust} mb-4 px-3`}
             size="1.5rem"
           />
-          {errBest && (
-            <Alert variant="danger" className="mt-5">
-              {errBest?.response?.data?.error || errBest.message}
-            </Alert>
-          )}
+          <BestSeller bestSellerProducts={homeData.bestSeller} />
         </div>
-        {bestLoad && (
-          <div className="mt-5 px-3 d-flex gap-3 overflow-x-auto overflow-y-hidden">
-            {Array.from({ length: 4 }, (_, index) => (
-              <Skeleton
-                key={index}
-                height="400px"
-                width="300px"
-                containerClassName="product-skeleton"
-                className="rounded-4"
-              />
-            ))}
-          </div>
-        )}
-      </Container>
-      <BestSeller bestSellerProducts={bestSellerProducts} />
-      <Container fluid="xl" className="px-3">
-        <div style={{ marginTop: "6rem" }}>
+        <div style={{ marginTop: "6rem" }} className="px-3">
           <Headings
             text="Quick Links"
             className="text-black fw-semibold"
@@ -210,7 +121,7 @@ export default function Home() {
             size="1.5rem"
           />
           <div className="mt-3 d-flex gap-3">
-            {links.map(({ id, name, path, color, variant}) => (
+            {links.map(({ id, name, path, color, variant }) => (
               <ActionButton
                 key={id}
                 text={name}

@@ -23,6 +23,7 @@ import OrderSummary from "./checkout/OrderSummary";
 import AllOrders from "./orders/AllOrders";
 import Paypal from "./payments/Paypal";
 import Paystack from "./payments/Paystack";
+import Error from "./Error";
 
 export {
   Nav,
@@ -51,4 +52,5 @@ export {
   AllOrders,
   Paypal,
   Paystack,
+  Error
 };

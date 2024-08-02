@@ -4,12 +4,11 @@ import Texts from "../Texts";
 import { formatCurrency } from "@/utils";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { Container } from "react-bootstrap";
 
 export default function BestSeller({ bestSellerProducts }) {
   return (
     <div className="mt-4">
-      <Container className="px-3">
+      <>
         <Swiper
           navigation={true}
           modules={[Navigation]}
@@ -17,7 +16,7 @@ export default function BestSeller({ bestSellerProducts }) {
           slidesPerView={3}
           spaceBetween={20}
         >
-          {bestSellerProducts?.products?.map((item) => (
+          {bestSellerProducts?.data?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
               className="bg-white homeBox position-relative rounded-4 shadow-sm "
@@ -55,10 +54,10 @@ export default function BestSeller({ bestSellerProducts }) {
             </SwiperSlide>
           ))}
         </Swiper>
-      </Container>
+      </>
       {/* mobile */}
       <div className="px-3 d-lg-none d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
-        {bestSellerProducts?.products?.map((item) => (
+        {bestSellerProducts?.data?.products?.map((item) => (
           <Link
             key={item._id}
             className="homeBox position-relative rounded-4 border bg-white shadow-sm"

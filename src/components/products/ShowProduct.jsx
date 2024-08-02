@@ -32,7 +32,7 @@ export default function ShowProduct({
         <Col md={6} className="mb-5">
           <div className="d-none d-lg-flex gap-4">
             <div>
-              {product?.image?.map((item, i) => (
+              {product?.data?.image?.map((item, i) => (
                 <div key={i} className="d-none d-lg-block mb-3">
                   <LazyLoadImage
                     effect="blur"
@@ -49,7 +49,7 @@ export default function ShowProduct({
               ))}
             </div>
             <div>
-              {product?.image?.map((item, i) => (
+              {product?.data?.image?.map((item, i) => (
                 <div key={i} className="position-relative">
                   {i === active && (
                     <>
@@ -87,22 +87,22 @@ export default function ShowProduct({
             </div>
           </div>
           <div className="d-flex d-lg-none">
-            <ImageSlide image={product?.image} expandImg={expandImg} />
+            <ImageSlide image={product?.data?.image} expandImg={expandImg} />
           </div>
         </Col>
         <Col md={6} lg={5} className="mb-5">
           <div>
-            <Headings text={product.name} size="1.6rem" />
+            <Headings text={product.data?.name} size="1.6rem" />
             <Texts
               text={
                 <>
                   BRAND:{" "}
                   <span
                     className="fw-medium cursor"
-                    title={`see ${product.brand} products`}
-                    onClick={() => searchBrand(product.brand)}
+                    title={`see ${product.data?.brand} products`}
+                    onClick={() => searchBrand(product.data?.brand)}
                   >
-                    {product.brand}
+                    {product.data?.brand}
                   </span>
                 </>
               }
@@ -110,17 +110,19 @@ export default function ShowProduct({
               color="var(--bg-zinc-700)"
             />
             <Texts
-              text={formatCurrency(product.price ? product.price : 0)}
+              text={formatCurrency(
+                product.data?.price ? product.data?.price : 0
+              )}
               size="1.2rem"
               color="var(--bg-zinc-700)"
             />
 
             <ActionButton
-              text={product.inStock ? "Add To Cart" : " Out of stock"}
-              onClick={() => addToCart(product)}
+              text={product.data?.inStock ? "Add To Cart" : " Out of stock"}
+              onClick={() => addToCart(product?.data)}
               className="w-100 border-0 py-2"
               style={{ backgroundColor: "var(--bg-blue-400" }}
-              disabled={!product.inStock}
+              disabled={!product.data?.inStock}
             />
 
             <Texts
@@ -128,7 +130,10 @@ export default function ShowProduct({
               size="1.2rem"
               className="mt-5 fw-medium"
             />
-            <Texts text={product.description} color="var(--bg-zinc-600)" />
+            <Texts
+              text={product.data?.description}
+              color="var(--bg-zinc-600)"
+            />
           </div>
         </Col>
       </Row>

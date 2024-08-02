@@ -1,9 +1,8 @@
-import { Loader, OrderSummary } from "@/components";
+import { Error, Loader, OrderSummary } from "@/components";
 import { useStore } from "@/hooks";
 import { ProductsLayout, RootLayout } from "@/layouts";
 import {
   CartItems,
-  CategoryProducts,
   Checkout,
   EditProfile,
   ForgotPassword,
@@ -18,10 +17,11 @@ import {
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedUser } from "./ProtectedRoutes";
 import { lazy, Suspense } from "react";
-import { categoryService } from "@/api";
+import { categoryService, productService } from "@/api";
 const PageNotFound = lazy(() => import("@/components/PageNotFound"));
 const Home = lazy(() => import("@/pages/home/Home"));
 const Orders = lazy(() => import("@/pages/orders/Orders"));
+const CategoryProducts = lazy(() => import("@/pages/products/Products"));
 
 export default function AppRoutes() {
   const { token } = useStore();
@@ -33,17 +33,19 @@ export default function AppRoutes() {
       element: <RootLayout />,
       children: [
         {
-          path: "/",
           index: true,
           element: (
             <Suspense fallback={<Loader />}>
               <Home />
             </Suspense>
           ),
+          errorElement: <Error />,
           loader: async () => {
-            const categories = await categoryService.getAllCategories(); 
-            return categories;
-          }, 
+            const categories = await categoryService.getAllCategories();
+            const newProducts = await productService.getNewProducts();
+            const bestSeller = await productService.getBestSellerProducts();
+            return { categories, newProducts, bestSeller };
+          },
         },
         {
           path: "products",
@@ -56,10 +58,23 @@ export default function AppRoutes() {
                   <CategoryProducts />
                 </Suspense>
               ),
+              errorElement: <Error />,
+              loader: ({ params }) =>
+                productService.getProductsByCategory(params.categoryName),
             },
             {
               path: ":categoryName/:slug",
               element: <ProductDetail />,
+              errorElement: <Error />,
+              loader: async ({ params }) => {
+                const getAProduct = await productService.getAProduct(
+                  params.slug
+                );
+                const getRecommended =
+                  await productService.getRecommendedProducts(params.slug);
+
+                return { getAProduct, getRecommended };
+              },
             },
             {
               path: "search",
