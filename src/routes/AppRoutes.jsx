@@ -26,6 +26,8 @@ const Orders = lazy(() => import("@/pages/orders/Orders"));
 
 export default function AppRoutes() {
   const { token, loggedInUser } = useStore();
+  const searchParams = new URLSearchParams(window.location.search);
+  const getSearchParams = searchParams.get("page");
 
   const routes = [
     {
@@ -111,7 +113,8 @@ export default function AppRoutes() {
             </Suspense>
           ),
           errorElement: <Error />,
-          loader: () => orderService.getAllClientOrders(loggedInUser?._id),
+          loader: () =>
+            orderService.getAllClientOrders(loggedInUser?._id, getSearchParams),
           children: [
             {
               path: ":orderId",

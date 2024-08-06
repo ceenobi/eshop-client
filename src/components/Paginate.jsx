@@ -15,7 +15,7 @@ export default function Paginate({
       <span className="d-none d-md-block small fw-semibold">
         {itemsPerPage} Entries Per Page
       </span>
-      <Pagination size="sm">
+      <Pagination size="md">
         <Pagination.First disabled={!prevPage} onClick={handleFirstPage} />
         <Pagination.Prev
           disabled={!prevPage}

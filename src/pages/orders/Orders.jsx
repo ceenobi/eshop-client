@@ -9,45 +9,46 @@ import {
   useLoaderData,
 } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Orders() {
-  const [currentPage, setCurrentPage] = useState(1);
   const { data } = useLoaderData();
-  console.log(data);
   const [searchParams] = useSearchParams();
   const { itemsPerPage, loggedInUser } = useStore();
   useTitle(`${loggedInUser?.username} orders`);
   const navigate = useNavigate();
   const location = useLocation();
-  const page = searchParams.get("page");
-  const params = new URLSearchParams(searchParams);
+  const page = searchParams.get("page") || 1;
+  const params = new URLSearchParams(location.search);
   //paginate
   const { totalPages, count, orders } = data;
-  useEffect(() => {
-    const pageParam = searchParams.get("page");
-    setCurrentPage(pageParam ? parseInt(pageParam) : 1);
-  }, [searchParams]);
-  const prevPage = itemsPerPage * (currentPage - 1) > 0;
-  const nextPage = itemsPerPage * (currentPage - 1) + itemsPerPage < count;
+  const prevPage = itemsPerPage * (parseInt(page) - 1) > 0;
+  const nextPage = itemsPerPage * (parseInt(page) - 1) + itemsPerPage < count;
   const firstPage = 1;
   const lastPage = Math.ceil(count / itemsPerPage);
+
+  useEffect(() => {
+    const newPage = searchParams.get("page") || 1;
+    if (newPage !== page) {
+      navigate(0);
+    }
+  }, [searchParams, navigate, page]);
 
   const handlePageChange = (type) => {
     type === "prev"
       ? params.set("page", parseInt(page) - 1)
       : params.set("page", parseInt(page) + 1);
-    navigate(window.location.pathname + "?" + params.toString());
+    navigate({ search: params.toString() });
   };
 
   const handleFirstPage = () => {
     params.set("page", firstPage);
-    navigate(window.location.pathname + "?" + params.toString());
+    navigate({ search: params.toString() });
   };
 
   const handleLastPage = () => {
     params.set("page", lastPage);
-    navigate(window.location.pathname + "?" + params.toString());
+    navigate({ search: params.toString() });
   };
 
   return (
