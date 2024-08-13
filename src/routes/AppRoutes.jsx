@@ -1,4 +1,4 @@
-import { Error, Loader, OrderSummary } from "@/components";
+import { Loader, OrderSummary } from "@/components";
 import { useStore } from "@/hooks";
 import {
   CartItems,
@@ -18,16 +18,13 @@ import {
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedUser, PublicRoutes } from "./ProtectedRoutes";
 import { lazy, Suspense } from "react";
-import { categoryService, orderService, productService } from "@/api";
 const PageNotFound = lazy(() => import("@/components/PageNotFound"));
 const RootLayout = lazy(() => import("@/layouts/RootLayout"));
 const ProductsLayout = lazy(() => import("@/layouts/ProductsLayout"));
 const Orders = lazy(() => import("@/pages/orders/Orders"));
 
 export default function AppRoutes() {
-  const { token, loggedInUser } = useStore();
-  const searchParams = new URLSearchParams(window.location.search);
-  const getSearchParams = searchParams.get("page");
+  const { token } = useStore();
 
   const routes = [
     {
@@ -42,42 +39,22 @@ export default function AppRoutes() {
         {
           index: true,
           element: <Home />,
-          errorElement: <Error />,
-          loader: async () => {
-            const categories = await categoryService.getAllCategories();
-            const newProducts = await productService.getNewProducts();
-            const bestSeller = await productService.getBestSellerProducts();
-            return { categories, newProducts, bestSeller };
-          },
         },
         {
           path: "products",
           element: (
             <Suspense fallback={<Loader />}>
-              <ProductsLayout />{" "}
+              <ProductsLayout />
             </Suspense>
           ),
           children: [
             {
               path: ":categoryName",
               element: <CategoryProducts />,
-              errorElement: <Error />,
-              loader: ({ params }) =>
-                productService.getProductsByCategory(params.categoryName),
             },
             {
               path: ":categoryName/:slug",
               element: <ProductDetail />,
-              errorElement: <Error />,
-              loader: async ({ params }) => {
-                const getAProduct = await productService.getAProduct(
-                  params.slug
-                );
-                const getRecommended =
-                  await productService.getRecommendedProducts(params.slug);
-
-                return { getAProduct, getRecommended };
-              },
             },
             {
               path: "search",
@@ -112,9 +89,6 @@ export default function AppRoutes() {
               </ProtectedUser>
             </Suspense>
           ),
-          errorElement: <Error />,
-          loader: () =>
-            orderService.getAllClientOrders(loggedInUser?._id, getSearchParams),
           children: [
             {
               path: ":orderId",

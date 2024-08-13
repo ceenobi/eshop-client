@@ -20,6 +20,12 @@ export default function Search() {
   const searchResult = useMemo(() => data, [data]);
   useTitle(`Search results for ${query}`);
 
+  useEffect(() => {
+    if (query) {
+      inputRef.current.value = query;
+    }
+  }, [query]);
+
   const handleSearch = useDebouncedCallback((e) => {
     if (e) {
       e.preventDefault();

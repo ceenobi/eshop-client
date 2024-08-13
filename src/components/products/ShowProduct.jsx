@@ -24,7 +24,7 @@ export default function ShowProduct({
   const navigate = useNavigate();
 
   const searchBrand = (brandName) => {
-    navigate(`/search?query=${brandName}`);
+    navigate(`/products/search?query=${brandName}`);
   };
   return (
     <>
@@ -32,7 +32,7 @@ export default function ShowProduct({
         <Col md={6} className="mb-5">
           <div className="d-none d-lg-flex gap-4">
             <div>
-              {product?.data?.image?.map((item, i) => (
+              {product?.image?.map((item, i) => (
                 <div key={i} className="d-none d-lg-block mb-3">
                   <LazyLoadImage
                     effect="blur"
@@ -49,14 +49,14 @@ export default function ShowProduct({
               ))}
             </div>
             <div>
-              {product?.data?.image?.map((item, i) => (
+              {product?.image?.map((item, i) => (
                 <div key={i} className="position-relative">
                   {i === active && (
                     <>
                       <LazyLoadImage
                         effect="blur"
                         src={item}
-                        alt={product?.data?.name}
+                        alt={product?.name}
                         width={450}
                         height={500}
                       />
@@ -87,22 +87,22 @@ export default function ShowProduct({
             </div>
           </div>
           <div className="d-flex d-lg-none">
-            <ImageSlide image={product?.data?.image} expandImg={expandImg} />
+            <ImageSlide image={product?.image} expandImg={expandImg} />
           </div>
         </Col>
         <Col md={6} lg={5} className="mb-5">
           <div>
-            <Headings text={product.data?.name} size="1.6rem" />
+            <Headings text={product.name} size="1.6rem" />
             <Texts
               text={
                 <>
-                  BRAND:{" "}
+                  Brand:{" "}
                   <span
                     className="fw-medium cursor"
-                    title={`see ${product.data?.brand} products`}
-                    onClick={() => searchBrand(product.data?.brand)}
+                    title={`see ${product.brand} products`}
+                    onClick={() => searchBrand(product.brand)}
                   >
-                    {product.data?.brand}
+                    {product.brand}
                   </span>
                 </>
               }
@@ -110,19 +110,17 @@ export default function ShowProduct({
               color="var(--bg-zinc-700)"
             />
             <Texts
-              text={formatCurrency(
-                product.data?.price ? product.data?.price : 0
-              )}
-              size="1.2rem"
+              text={formatCurrency(product.price ? product.price : 0)}
+              size="1.1rem"
               color="var(--bg-zinc-700)"
             />
 
             <ActionButton
-              text={product.data?.inStock ? "Add To Cart" : " Out of stock"}
+              text={product.inStock ? "Add To Cart" : " Out of stock"}
               onClick={() => addToCart(product?.data)}
               className="w-100 border-0 py-2"
               style={{ backgroundColor: "var(--bg-blue-400" }}
-              disabled={!product.data?.inStock}
+              disabled={!product.inStock}
             />
 
             <Texts
@@ -130,10 +128,7 @@ export default function ShowProduct({
               size="1.2rem"
               className="mt-5 fw-medium"
             />
-            <Texts
-              text={product.data?.description}
-              color="var(--bg-zinc-600)"
-            />
+            <Texts text={product.description} color="var(--bg-zinc-600)" />
           </div>
         </Col>
       </Row>

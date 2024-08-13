@@ -9,7 +9,7 @@ import { Badge } from "react-bootstrap";
 
 export default function ProductCard({ product }) {
   const { increaseCartQuantity } = useStore();
-  const { slug, category, image, name, price, inStock } = product;
+  const { slug, category, image, name, price, inStock, brand } = product;
 
   const addToCart = (product) => {
     increaseCartQuantity(product);
@@ -17,7 +17,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-between cardBox bg-white  mb-4 position-relative ">
+    <div className="cardBox position-relative">
       {!inStock && (
         <Badge bg="secondary" className="position-absolute top-0 m-3 z-3">
           Out of stock
@@ -30,20 +30,25 @@ export default function ProductCard({ product }) {
             src={image[0]}
             alt={name}
             width="100%"
-            height={210}
-            className="object-fit-cover"
+            className="object-fit-fill border border-black productImg"
           />
         </Link>
-        <Link to={`/products/${category.toLowerCase()}/${slug}`}>
+        <Link to={`/products/${category.toLowerCase()}/${slug}`} className="text-start">
           <Texts
-            text={name?.length > 35 ? name?.slice(0, 35) + "..." : name}
-            className="px-1 my-2 mb-0 fw-semibold text-start"
+            text={brand}
+            className="px-1 fw-semibold text-uppercase mt-2 mb-1"
+            size="0.8rem"
+            color="var(--bg-zinc-700)"
+          />
+          <Texts
+            text={name}
+            className="px-1 mb-2"
             size="0.8rem"
             color="var(--bg-zinc-700)"
           />
         </Link>
       </div>
-      <div className="px-1 mt-2 d-flex">
+      <div className="px-1 d-flex">
         <Texts
           text={formatCurrency(price)}
           size="0.9rem"

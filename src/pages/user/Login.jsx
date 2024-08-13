@@ -14,7 +14,7 @@ import { AuthLayout } from "@/layouts";
 
 export default function Login() {
   const [reveal, setReveal] = useState(false);
-  const { setToken, setRefreshToken } = useStore();
+  const { setToken } = useStore();
   const {
     register,
     handleSubmit,
@@ -32,7 +32,6 @@ export default function Login() {
     const { status, data } = await userService.login(credentials);
     if (status === 200) {
       setToken(data.accessToken);
-      setRefreshToken(data.refreshToken);
       toast.success(data.msg);
       navigate(from);
     }
@@ -45,14 +44,14 @@ export default function Login() {
         onSubmit={handleSubmit(onFormSubmit)}
       >
         <AuthFormInput
-          type="email"
-          id="email"
-          name="email"
-          label="Email address (required)"
+          type="text"
+          id="username"
+          name="username"
+          label="Username (required)"
           register={register}
-          validateFields={validateFields?.email}
-          errors={errors.email}
-          placeholder="john@email.com"
+          validateFields={validateFields?.username}
+          errors={errors.username}
+          placeholder=""
           className="mb-3"
         />
         <div className="position-relative">

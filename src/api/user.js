@@ -16,6 +16,10 @@ const register = (credentials) => {
   return http.post("/auth/register", credentials);
 };
 
+const getRefreshToken = (userId) => {
+  return http.get(`/auth/getrefreshtoken/${userId}`);
+};
+
 const refreshToken = (refreshToken) => {
   return http.post("/auth/refresh-token", refreshToken);
 };
@@ -49,6 +53,7 @@ export default {
   authUser,
   register,
   refreshToken,
+  getRefreshToken,
   forgotPassword,
   resetPassword,
   updateAccount,

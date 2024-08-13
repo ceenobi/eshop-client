@@ -172,7 +172,7 @@ export default function CartItems() {
             text="Buy Now"
             variant="primary"
             as={Link}
-            to="/products/heels"
+            to="/products"
             size="lg"
             style={{ width: "200px", backgroundColor: "var(--bg-blue-400)" }}
             className="text-white"

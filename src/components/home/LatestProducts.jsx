@@ -15,7 +15,7 @@ export default function LatestProducts({ newProducts }) {
         slidesPerView={3}
         spaceBetween={20}
       >
-        {newProducts?.data?.products?.map((item) => (
+        {newProducts?.products?.map((item) => (
           <SwiperSlide
             key={item._id}
             className="bg-white homeBox position-relative rounded-4 shadow-sm"
@@ -54,7 +54,7 @@ export default function LatestProducts({ newProducts }) {
 
       {/* mobile */}
       <div className="px-3 d-lg-none d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
-        {newProducts?.data?.products?.map((item) => (
+        {newProducts?.products?.map((item) => (
           <Link
             key={item._id}
             className="homeBox position-relative rounded-4 shadow-sm"
@@ -65,6 +65,7 @@ export default function LatestProducts({ newProducts }) {
               src={item.image[0]}
               alt={item.name}
               width={300}
+              
               height={450}
               className="w-100 h-100 rounded-4 mb-0"
             />

@@ -12,10 +12,6 @@ export const StoreProvider = ({ children }) => {
   const [cartItems, setCartItems] = usePersist("cart", []);
   const [loggedInUser, setLoggedInUser] = usePersist("clientLoggedIn", null);
   const [token, setToken] = usePersist("clientToken", null);
-  const [refreshToken, setRefreshToken] = usePersist(
-    "clientRefreshToken",
-    null
-  );
   const [shippingDetails, setShippingDetails] = usePersist(
     "shippingDetails",
     {}
@@ -34,7 +30,7 @@ export const StoreProvider = ({ children }) => {
     }
   }
 
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   const increaseCartQuantity = (id) => {
     setCartItems((currItems) => {
@@ -97,18 +93,37 @@ export const StoreProvider = ({ children }) => {
 
   const refreshUserToken = useCallback(async () => {
     try {
-      const { data } = await userService.refreshToken({
-        refreshToken: refreshToken,
+      const refreshTokenResponse = await userService.getRefreshToken(
+        loggedInUser?._id
+      );
+      const accessTokenResponse = await userService.refreshToken({
+        refreshToken: refreshTokenResponse.data.refreshToken,
       });
-      setToken(data.accessToken);
+      setToken(accessTokenResponse.data.accessToken);
       getUser();
     } catch (error) {
+      console.error(error);
       console.error(error);
       setLoggedInUser(null);
       setToken(null);
       setStep(1);
     }
-  }, [refreshToken, setToken, getUser, setLoggedInUser, setStep]);
+  }, [loggedInUser?._id, setToken, getUser, setLoggedInUser, setStep]);
+
+  // const refreshUserToken = useCallback(async () => {
+  //   try {
+  //     const { data } = await userService.refreshToken({
+  //       refreshToken: refreshToken,
+  //     });
+  //     setToken(data.accessToken);
+  //     getUser();
+  //   } catch (error) {
+  //     console.error(error);
+  //     setLoggedInUser(null);
+  //     setToken(null);
+  //     setStep(1);
+  //   }
+  // }, [refreshToken, setToken, getUser, setLoggedInUser, setStep]);
 
   const logout = useCallback(() => {
     if (!token) {
@@ -119,16 +134,8 @@ export const StoreProvider = ({ children }) => {
       setToken(null);
       setStep(1);
       setDiscountCode(null);
-      setRefreshToken(null);
     }
-  }, [
-    setDiscountCode,
-    setLoggedInUser,
-    setRefreshToken,
-    setStep,
-    setToken,
-    token,
-  ]);
+  }, [setDiscountCode, setLoggedInUser, setStep, setToken, token]);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -139,9 +146,12 @@ export const StoreProvider = ({ children }) => {
   }, [getUser, loggedInUser]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      refreshUserToken();
-    }, 12 * 60 * 1000);
+    const interval = setInterval(
+      () => {
+        refreshUserToken();
+      },
+      12 * 60 * 1000
+    );
     return () => clearInterval(interval);
   }, [refreshUserToken]);
 
@@ -151,7 +161,6 @@ export const StoreProvider = ({ children }) => {
         await refreshUserToken();
       } catch (error) {
         console.error(error);
-        window.location.href("/");
         setStep(1);
       }
     };
@@ -188,7 +197,6 @@ export const StoreProvider = ({ children }) => {
     setToken,
     loggedInUser,
     setLoggedInUser,
-    setRefreshToken,
     logout,
     shippingDetails,
     setShippingDetails,

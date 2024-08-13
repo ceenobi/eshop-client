@@ -79,7 +79,7 @@ export default function ShippingForm({ step, setStep }) {
         className="mb-3"
       />
       <AuthFormInput
-        type="text"
+        type="tel"
         id="phone"
         name="phone"
         label="Phone(required)"

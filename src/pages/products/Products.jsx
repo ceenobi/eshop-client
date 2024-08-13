@@ -1,12 +1,9 @@
+import { productService } from "@/api";
 import { Headings, Paginate, Texts, ProductCard } from "@/components";
-import { useStore, useTitle } from "@/hooks";
-import { Col, Image, Row } from "react-bootstrap";
-import {
-  useLoaderData,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useFetch, useStore, useTitle } from "@/hooks";
+import { useMemo } from "react";
+import { Alert, Col, Image, Row, Spinner } from "react-bootstrap";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 export default function Products() {
   const [searchParams] = useSearchParams();
@@ -14,11 +11,16 @@ export default function Products() {
   const { categoryName } = useParams();
   useTitle(`Products ${categoryName}`);
   const navigate = useNavigate();
-  const { data } = useLoaderData();
   const page = searchParams.get("page") || 1;
   const params = new URLSearchParams(searchParams);
+  const { data, error, loading } = useFetch(
+    productService.getProductsByCategory,
+    categoryName,
+    page
+  );
+  const catProducts = useMemo(() => data, [data]);
   //paginate
-  const { totalPages, count, products } = data;
+  const { totalPages, count, products } = catProducts;
   const prevPage = itemsPerPage * (parseInt(page) - 1) > 0;
   const nextPage = itemsPerPage * (parseInt(page) - 1) + itemsPerPage < count;
   const firstPage = 1;
@@ -82,49 +84,42 @@ export default function Products() {
           </>
         }
         color="var(--bg-zinc-600)"
-        size="1.5rem"
+        size="1.1rem"
+        extra="mb-5"
       />
-      {/* {error && (
+      {error && (
         <Alert variant="danger" className="mt-5">
           {error?.response?.data?.error || error.message}
         </Alert>
-      )} */}
-      {/* {loading && (
-        <Row className="my-4">
-          {Array.from({ length: 4 }, (_, index) => (
-            <Col xs={6} md={4} lg={3} key={index} className="mb-3">
-              <Skeleton
-                height="320px"
-                containerClassName="product-skeleton"
-                className="rounded-4"
-              />
-            </Col>
-          ))}
-        </Row>
-      )} */}
-      {products?.length > 0 && (
-        <Row className="mt-4">
-          {products?.map((product) => (
-            <Col xs={6} md={4} lg={3} key={product._id}>
-              <ProductCard product={product} />
-            </Col>
-          ))}
-        </Row>
       )}
-      {products?.length === 0 && (
-        <Texts text="No products to display" size="1.3rem" />
+      {loading && (
+        <div className="text-center my-3">
+          <Spinner animation="border" size="sm" />
+        </div>
       )}
-      <Paginate
-        prevPage={prevPage}
-        nextPage={nextPage}
-        page={page}
-        handleLastPage={handleLastPage}
-        handleFirstPage={handleFirstPage}
-        handlePageChange={handlePageChange}
-        totalPages={totalPages}
-        lastPage={lastPage}
-        itemsPerPage={itemsPerPage}
-      />
+        {products?.length > 0 && (
+          <Row className="my-2">
+            {products?.map((product) => (
+              <Col xs={6} md={4} lg={3} key={product._id} className="mb-4">
+                <ProductCard product={product} />
+              </Col>
+            ))}
+          </Row>
+        )}
+        {products?.length === 0 && (
+          <Texts text="No products to display" size="1.3rem" />
+        )}
+        <Paginate
+          prevPage={prevPage}
+          nextPage={nextPage}
+          page={page}
+          handleLastPage={handleLastPage}
+          handleFirstPage={handleFirstPage}
+          handlePageChange={handlePageChange}
+          totalPages={totalPages}
+          lastPage={lastPage}
+          itemsPerPage={itemsPerPage}
+        />
     </>
   );
 }

@@ -1,54 +1,52 @@
 import { Headings, Paginate, Texts, AllOrders } from "@/components";
-import { useStore, useTitle } from "@/hooks";
-import { Container } from "react-bootstrap";
+import { useFetch, useStore, useTitle } from "@/hooks";
+import { Alert, Container } from "react-bootstrap";
 import {
   useNavigate,
   useSearchParams,
   useLocation,
   Outlet,
-  useLoaderData,
 } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
-import { useEffect } from "react";
+import { useMemo } from "react";
+import { orderService } from "@/api";
 
 export default function Orders() {
-  const { data } = useLoaderData();
   const [searchParams] = useSearchParams();
   const { itemsPerPage, loggedInUser } = useStore();
   useTitle(`${loggedInUser?.username} orders`);
+  const page = searchParams.get("page") || 1;
   const navigate = useNavigate();
   const location = useLocation();
-  const page = searchParams.get("page") || 1;
   const params = new URLSearchParams(location.search);
+  const { data, error } = useFetch(
+    orderService.getAllClientOrders,
+    loggedInUser?._id,
+    page
+  );
+  const yourOrders = useMemo(() => data, [data]);
+  const { totalPages, count, orders } = yourOrders;
   //paginate
-  const { totalPages, count, orders } = data;
   const prevPage = itemsPerPage * (parseInt(page) - 1) > 0;
   const nextPage = itemsPerPage * (parseInt(page) - 1) + itemsPerPage < count;
   const firstPage = 1;
   const lastPage = Math.ceil(count / itemsPerPage);
 
-  useEffect(() => {
-    const newPage = searchParams.get("page") || 1;
-    if (newPage !== page) {
-      navigate(0);
-    }
-  }, [searchParams, navigate, page]);
-
   const handlePageChange = (type) => {
     type === "prev"
       ? params.set("page", parseInt(page) - 1)
       : params.set("page", parseInt(page) + 1);
-    navigate({ search: params.toString() });
+    navigate(window.location.pathname + "?" + params.toString());
   };
 
   const handleFirstPage = () => {
     params.set("page", firstPage);
-    navigate({ search: params.toString() });
+    navigate(window.location.pathname + "?" + params.toString());
   };
 
   const handleLastPage = () => {
     params.set("page", lastPage);
-    navigate({ search: params.toString() });
+    navigate(window.location.pathname + "?" + params.toString());
   };
 
   return (
@@ -56,6 +54,11 @@ export default function Orders() {
       {location.pathname === "/orders" ? (
         <>
           <Headings text="Orders" size="1.8rem" />
+          {error && (
+            <Alert variant="danger" className="mt-5">
+              {error?.response?.data?.error || error.message}
+            </Alert>
+          )}
           {orders && orders?.length > 0 && (
             <>
               {orders?.map((order) => (

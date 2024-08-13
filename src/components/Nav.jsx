@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import classnames from "classnames";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { Badge, Container, Dropdown } from "react-bootstrap";
-import { GiWingfoot } from "react-icons/gi";
+import { IoBagSharp } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
 import { IoIosLogOut } from "react-icons/io";
 import Drawer from "./Drawer";
@@ -11,9 +11,10 @@ import Drawer from "./Drawer";
 export default function Nav() {
   const { categories, cartQuantity, loggedInUser, logout } = useStore();
   const location = useLocation();
+  console.log(location.pathname);
 
   return (
-    <nav>
+    <header>
       <Container
         fluid="xl"
         className="p-3 d-flex align-items-center justify-content-between justify-content-md-start"
@@ -21,8 +22,8 @@ export default function Nav() {
         <Drawer />
         <NavLink to="/" className="me-4">
           <div className="d-flex align-items-center gap-1">
-            <GiWingfoot size="20px" color="#3f3f46" />
-            <span className="fs-5 fw-medium text-black">Footsy</span>
+            <IoBagSharp size="24px" color="#3f3f46" />
+            <span className="fs-5 fw-medium text-black mt-1">BAGGIT</span>
           </div>
         </NavLink>
         <div className="mx-0 mx-lg-5 d-none d-md-flex align-items-center gap-4 flex-md-grow-1">
@@ -32,8 +33,9 @@ export default function Nav() {
               to={`/products/${name.toLowerCase()}`}
               className={classnames({
                 "profile text-black small": true,
-                "text-black fw-bold":
-                  location.pathname === `/products/${name.toLowerCase()}`,
+                "text-danger fw-bold":
+                  location.pathname ===
+                  `/products/${name.toLowerCase().replace(/\s+/g, "")}`,
               })}
             >
               {name}
@@ -89,6 +91,6 @@ export default function Nav() {
           </NavLink>
         </div>
       </Container>
-    </nav>
+    </header>
   );
 }

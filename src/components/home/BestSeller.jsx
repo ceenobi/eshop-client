@@ -16,7 +16,7 @@ export default function BestSeller({ bestSellerProducts }) {
           slidesPerView={3}
           spaceBetween={20}
         >
-          {bestSellerProducts?.data?.products?.map((item) => (
+          {bestSellerProducts?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
               className="bg-white homeBox position-relative rounded-4 shadow-sm "
@@ -57,7 +57,7 @@ export default function BestSeller({ bestSellerProducts }) {
       </>
       {/* mobile */}
       <div className="px-3 d-lg-none d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
-        {bestSellerProducts?.data?.products?.map((item) => (
+        {bestSellerProducts?.products?.map((item) => (
           <Link
             key={item._id}
             className="homeBox position-relative rounded-4 border bg-white shadow-sm"

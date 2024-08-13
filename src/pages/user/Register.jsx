@@ -14,7 +14,7 @@ import { AuthLayout } from "@/layouts";
 
 export default function Register() {
   const [reveal, setReveal] = useState(false);
-  const { setToken, setRefreshToken } = useStore();
+  const { setToken } = useStore();
   const {
     register,
     handleSubmit,
@@ -32,7 +32,6 @@ export default function Register() {
     const { status, data } = await userService.register(credentials);
     if (status === 201) {
       setToken(data.accessToken);
-      setRefreshToken(data.refreshToken);
       toast.success(data.msg);
       navigate(from);
     }

@@ -63,7 +63,10 @@ button:hover {
 .cardBox {
   transition: 0.3s ease-in;
   min-width: 135px;
-  height: 310px;
+}
+
+.productImg{
+  height: 280px;
 }
 
 .cardBox:hover,
@@ -115,4 +118,8 @@ button:hover {
   .cardBox {
     min-width: 170px;
   }
+
+.productImg {
+  height: 380px;
+}
 }

@@ -15,7 +15,7 @@ export default function RecommendProducts({ recommended }) {
         slidesPerView={4}
         spaceBetween={24}
       >
-        {recommended?.data?.map((product) => (
+        {recommended?.map((product) => (
           <SwiperSlide key={product._id}>
             <ProductCard product={product} />
           </SwiperSlide>
@@ -24,7 +24,7 @@ export default function RecommendProducts({ recommended }) {
 
       <div className="d-lg-none mt-3 d-flex gap-3 overflow-x-scroll overflow-y-hidden scrollbody">
         <Suspense fallback={<Loader />}>
-          {recommended?.data?.map((product) => (
+          {recommended?.map((product) => (
             <ProductCard product={product} key={product._id} />
           ))}
         </Suspense>

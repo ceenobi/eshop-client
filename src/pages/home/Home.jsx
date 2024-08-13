@@ -4,13 +4,16 @@ import {
   ShopWithUs,
   Texts,
   DisplayCategories,
-  LatestProducts,
-  BestSeller,
 } from "@/components";
 import styles from "../pages.module.css";
-import { Container, Image } from "react-bootstrap";
-import { useTitle } from "@/hooks";
-import { Link, useLoaderData } from "react-router-dom";
+import { Alert, Container, Image, Spinner } from "react-bootstrap";
+import { useFetch, useTitle } from "@/hooks";
+import { Link } from "react-router-dom";
+import { categoryService, productService } from "@/api";
+import { lazy, useMemo, Suspense } from "react";
+
+const LatestProducts = lazy(() => import("@/components/home/LatestProducts"));
+const BestSeller = lazy(() => import("@/components/home/BestSeller"));
 
 const links = [
   {
@@ -32,7 +35,18 @@ const links = [
 
 export default function Home() {
   useTitle("Footsy Home");
-  const homeData = useLoaderData();
+  const { data: cat, error: errCat } = useFetch(
+    categoryService.getAllCategories
+  );
+  const { data: newProductsData, error } = useFetch(
+    productService.getNewProducts
+  );
+  const { data: bestSelling, error: err } = useFetch(
+    productService.getBestSellerProducts
+  );
+  const categories = useMemo(() => cat, [cat]);
+  const newProducts = useMemo(() => newProductsData, [newProductsData]);
+  const bestSellerProducts = useMemo(() => bestSelling, [bestSelling]);
 
   return (
     <div className="py-5">
@@ -67,8 +81,13 @@ export default function Home() {
               </span>
             </div>
           </div>
+          {errCat && (
+            <Alert variant="danger" className="mt-5">
+              {errCat?.response?.data?.error || errCat.message}
+            </Alert>
+          )}
         </div>
-        <DisplayCategories categories={homeData.categories} />
+        <DisplayCategories categories={categories} />
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text={
@@ -81,7 +100,20 @@ export default function Home() {
             extra={`${styles.heroAdjust} mb-4 px-3`}
             size="1.5rem"
           />
-          <LatestProducts newProducts={homeData.newProducts} />
+          {error && (
+            <Alert variant="danger" className="mt-5">
+              {error?.response?.data?.error || error.message}
+            </Alert>
+          )}
+          <Suspense
+            fallback={
+              <div className="text-center my-3">
+                <Spinner animation="border" size="sm" />
+              </div>
+            }
+          >
+            <LatestProducts newProducts={newProducts} />
+          </Suspense>
         </div>
         <div style={{ marginTop: "6rem" }}>
           <Headings
@@ -111,7 +143,20 @@ export default function Home() {
             extra={`${styles.heroAdjust} mb-4 px-3`}
             size="1.5rem"
           />
-          <BestSeller bestSellerProducts={homeData.bestSeller} />
+          {err && (
+            <Alert variant="danger" className="mt-5">
+              {err?.response?.data?.error || err.message}
+            </Alert>
+          )}
+          <Suspense
+            fallback={
+              <div className="text-center my-3">
+                <Spinner animation="border" size="sm" />
+              </div>
+            }
+          >
+            <BestSeller bestSellerProducts={bestSellerProducts} />
+          </Suspense>
         </div>
         <div style={{ marginTop: "6rem" }} className="px-3">
           <Headings

@@ -32,7 +32,7 @@ export default function Profile() {
           text={
             <>
               <span className="fw-bold text-black me-2">Hi,</span>
-              {loggedInUser.username}
+              {loggedInUser?.username}
             </>
           }
           color="var(--bg-zinc-600)"
@@ -84,14 +84,14 @@ export default function Profile() {
                     text="Username"
                     className="text-uppercase fw-medium mb-1"
                   />
-                  <Texts text={loggedInUser.username} />
+                  <Texts text={loggedInUser?.username} />
                 </div>
                 <div>
                   <Texts
                     text="Email"
                     className="text-uppercase fw-medium mb-1"
                   />
-                  <Texts text={loggedInUser.email} color="var(--bg-zinc-700)" />
+                  <Texts text={loggedInUser?.email} color="var(--bg-zinc-700)" />
                 </div>
               </div>
               <hr />
@@ -102,7 +102,7 @@ export default function Profile() {
                 />
 
                 <Texts
-                  text={formatDate(loggedInUser.createdAt)}
+                  text={formatDate(loggedInUser?.createdAt)}
                   color="var(--bg-zinc-700)"
                 />
               </div>
