@@ -16,7 +16,7 @@ export const StoreProvider = ({ children }) => {
     "shippingDetails",
     {}
   );
-  const [step, setStep] = usePersist("step", "1");
+  const [step, setStep] = usePersist("step", 1);
   const [paymentMethod, setPaymentMethod] = usePersist("paymentMethod", null);
   const [discountCode, setDiscountCode] = usePersist("discountCode", null);
 
@@ -103,27 +103,11 @@ export const StoreProvider = ({ children }) => {
       getUser();
     } catch (error) {
       console.error(error);
-      console.error(error);
       setLoggedInUser(null);
       setToken(null);
       setStep(1);
     }
   }, [loggedInUser?._id, setToken, getUser, setLoggedInUser, setStep]);
-
-  // const refreshUserToken = useCallback(async () => {
-  //   try {
-  //     const { data } = await userService.refreshToken({
-  //       refreshToken: refreshToken,
-  //     });
-  //     setToken(data.accessToken);
-  //     getUser();
-  //   } catch (error) {
-  //     console.error(error);
-  //     setLoggedInUser(null);
-  //     setToken(null);
-  //     setStep(1);
-  //   }
-  // }, [refreshToken, setToken, getUser, setLoggedInUser, setStep]);
 
   const logout = useCallback(() => {
     if (!token) {

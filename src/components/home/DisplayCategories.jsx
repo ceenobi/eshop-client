@@ -4,14 +4,9 @@ import Texts from "../Texts";
 
 export default function DisplayCategories({ categories }) {
   return (
-    <div className="mt-5 d-flex justify-content-md-center gap-3 overflow-x-auto overflow-y-hidden scrollbody">
+    <div className="mt-5 d-flex justify-content-lg-center gap-3 overflow-x-auto overflow-y-hidden scrollbody">
       {categories?.map(({ _id, name, image }) => (
-        <Link
-          to={`/products/${name.toLowerCase()}`}
-          key={_id}
-          style={{ width: "190px" }}
-          className="px-3"
-        >
+        <Link to={`/products/${name.toLowerCase()}`} key={_id} className="px-3">
           <LazyLoadImage
             effect="blur"
             src={image}

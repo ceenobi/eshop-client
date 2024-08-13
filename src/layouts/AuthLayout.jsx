@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import styles from "../pages/pages.module.css";
 import { Link } from "react-router-dom";
-import { GiWingfoot } from "react-icons/gi";
+import { IoBagSharp } from "react-icons/io5";
 import { Texts } from "@/components";
 
 export default function AuthLayout({ children, caption }) {
@@ -10,7 +10,7 @@ export default function AuthLayout({ children, caption }) {
       <Container fluid="xl" className="px-3 py-3 py-lg-5 min-vh-100">
         <div className="d-flex flex-column justify-content-center align-items-center">
           <Link to="/">
-            <GiWingfoot size="35px" color="#3f3f46" />
+            <IoBagSharp size="35px" color="#3f3f46" />
           </Link>
           <Texts
             text={caption}

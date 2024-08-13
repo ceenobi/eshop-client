@@ -1,11 +1,14 @@
 import { http } from "@/utils";
 const merchantCode = import.meta.env.VITE_TEEM_MERCHANT_CODE;
 
-const getAllProducts = async(page = 1) => {
+const getAllProducts = async (page = 1) => {
   return await http.get(`/product/${merchantCode}/all?page=${page}`);
 };
 const getNewProducts = async (page = 1) => {
   return await http.get(`/product/${merchantCode}/get/new?page=${page}`);
+};
+const getFeaturedProducts = async (page = 1) => {
+  return await http.get(`/product/${merchantCode}/get/featured?page=${page}`);
 };
 
 const getBestSellerProducts = async (page = 1) => {
@@ -40,4 +43,5 @@ export default {
   getProductsByCategory,
   getRecommendedProducts,
   searchProducts,
+  getFeaturedProducts,
 };

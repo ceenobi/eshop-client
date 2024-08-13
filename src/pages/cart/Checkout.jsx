@@ -17,7 +17,7 @@ export default function Checkout() {
 
   return (
     <Container fluid="xl" className="px-3 py-3 py-lg-5">
-      {cartItems.length > 0 ? (
+      {cartItems?.length > 0 ? (
         <div className="mt-4">
           <Headings
             text="Checkout details"

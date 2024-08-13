@@ -15,7 +15,7 @@ export default function RootLayout() {
           fluid="xl"
           className="px-3 mt-4 d-flex align-items-center justify-content-between text-uppercase fw-bold"
         >
-          <Texts text={<>&copy;Footsy, inc</>} size="12px" />
+          <Texts text={<>&copy;Baggit, inc</>} size="12px" />
           <Texts
             text={
               <>

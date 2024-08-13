@@ -33,7 +33,10 @@ export default function ProductCard({ product }) {
             className="object-fit-fill border border-black productImg"
           />
         </Link>
-        <Link to={`/products/${category.toLowerCase()}/${slug}`} className="text-start">
+        <Link
+          to={`/products/${category.toLowerCase()}/${slug}`}
+          className="text-start"
+        >
           <Texts
             text={brand}
             className="px-1 fw-semibold text-uppercase mt-2 mb-1"
@@ -55,13 +58,15 @@ export default function ProductCard({ product }) {
           color="var(--bg-zinc-600)"
           className="flex-grow-1 text-start"
         />
-        <IoCartSharp
-          size="22px"
-          onClick={() => addToCart(product)}
-          className="cursor d-none d-lg-block"
-          title="Add item to cart"
-          color="#3f3f46"
-        />
+        {inStock && (
+          <IoCartSharp
+            size="22px"
+            onClick={() => addToCart(product)}
+            className="cursor d-none d-lg-block"
+            title="Add item to cart"
+            color="#3f3f46"
+          />
+        )}
       </div>
     </div>
   );

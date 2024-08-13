@@ -37,7 +37,7 @@ export default function Register() {
     }
   });
   return (
-    <AuthLayout caption="Get your Footsy account">
+    <AuthLayout caption="Get your Baggit account">
       <Form
         className={`${styles.form} mx-auto`}
         onSubmit={handleSubmit(onFormSubmit)}

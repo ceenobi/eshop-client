@@ -11,7 +11,6 @@ import Drawer from "./Drawer";
 export default function Nav() {
   const { categories, cartQuantity, loggedInUser, logout } = useStore();
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
     <header>

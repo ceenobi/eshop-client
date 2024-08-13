@@ -29,7 +29,7 @@ export default function ForgotPassword() {
   });
 
   return (
-    <AuthLayout caption="Recover your Footsy account">
+    <AuthLayout caption="Recover your Baggit account">
       <Form
         className={`${styles.form} mx-auto`}
         onSubmit={handleSubmit(onFormSubmit)}

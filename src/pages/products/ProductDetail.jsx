@@ -24,7 +24,6 @@ export default function ProductDetail() {
   } = useFetch(productService.getRecommendedProducts, slug);
 
   const product = useMemo(() => data, [data]);
-  console.log(product);
   const recommended = useMemo(() => dataB, [dataB]);
   const { increaseCartQuantity } = useStore();
 

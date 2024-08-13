@@ -5,9 +5,9 @@ import { formatCurrency } from "@/utils";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
-export default function LatestProducts({ newProducts }) {
+const FeaturedProducts = ({ featuredProducts }) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 featuredProducts py-5 px-lg-4 rounded-4 shadow-sm">
       <Swiper
         navigation={true}
         modules={[Navigation]}
@@ -15,10 +15,10 @@ export default function LatestProducts({ newProducts }) {
         slidesPerView={3}
         spaceBetween={20}
       >
-        {newProducts?.products?.map((item) => (
+        {featuredProducts?.products?.map((item) => (
           <SwiperSlide
             key={item._id}
-            className="bg-white homeBox position-relative rounded-4"
+            className="homeBox position-relative rounded-4"
           >
             <Link
               to={`/products/${item.category.toLowerCase()}/${item.slug}`}
@@ -57,7 +57,7 @@ export default function LatestProducts({ newProducts }) {
 
       {/* mobile */}
       <div className="px-3 d-lg-none d-flex align-items-center gap-4 overflow-x-scroll overflow-y-hidden scrollbody">
-        {newProducts?.products?.map((item) => (
+        {featuredProducts?.products?.map((item) => (
           <Link
             key={item._id}
             className="homeBox position-relative rounded-4 shadow-sm"
@@ -95,4 +95,6 @@ export default function LatestProducts({ newProducts }) {
       </div>
     </div>
   );
-}
+};
+
+export default FeaturedProducts;

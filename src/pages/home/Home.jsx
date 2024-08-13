@@ -14,6 +14,9 @@ import { lazy, useMemo, Suspense } from "react";
 
 const LatestProducts = lazy(() => import("@/components/home/LatestProducts"));
 const BestSeller = lazy(() => import("@/components/home/BestSeller"));
+const FeaturedProducts = lazy(
+  () => import("@/components/home/FeaturedProducts")
+);
 
 const links = [
   {
@@ -44,9 +47,13 @@ export default function Home() {
   const { data: bestSelling, error: err } = useFetch(
     productService.getBestSellerProducts
   );
+  const { data: featured, error: errFeat } = useFetch(
+    productService.getFeaturedProducts
+  );
   const categories = useMemo(() => cat, [cat]);
   const newProducts = useMemo(() => newProductsData, [newProductsData]);
   const bestSellerProducts = useMemo(() => bestSelling, [bestSelling]);
+  const featuredProducts = useMemo(() => featured, [featured]);
 
   return (
     <div className="py-5">
@@ -55,7 +62,7 @@ export default function Home() {
           <Headings
             text={
               <>
-                <span className="fw-bold text-black me-2">Footsy.</span>The best
+                <span className="fw-bold text-black me-2">Baggit.</span>The best
                 way to buy the products you love.
               </>
             }
@@ -92,6 +99,33 @@ export default function Home() {
           <Headings
             text={
               <>
+                <span className="fw-bold text-black me-2">Featured.</span>Take a
+                look at our featured products.
+              </>
+            }
+            color="var(--bg-zinc-600)"
+            extra={`${styles.heroAdjust} mb-4 px-3`}
+            size="1.5rem"
+          />
+          {errFeat && (
+            <Alert variant="danger" className="mt-5">
+              {errFeat?.response?.data?.error || errFeat.message}
+            </Alert>
+          )}
+          <Suspense
+            fallback={
+              <div className="text-center my-3">
+                <Spinner animation="border" size="sm" />
+              </div>
+            }
+          >
+            <FeaturedProducts featuredProducts={featuredProducts} />
+          </Suspense>
+        </div>
+        <div style={{ marginTop: "6rem" }}>
+          <Headings
+            text={
+              <>
                 <span className="fw-bold text-black me-2">The latest.</span>Take
                 a look at what’s new, right now.
               </>
@@ -120,7 +154,7 @@ export default function Home() {
             text={
               <>
                 <span className="fw-bold text-black me-2">
-                  The Footsy difference.
+                  The Baggit difference.
                 </span>
                 Even more reasons to shop with us.
               </>

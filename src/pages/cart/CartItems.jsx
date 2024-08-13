@@ -19,7 +19,7 @@ export default function CartItems() {
 
   return (
     <Container fluid="xl" className="px-3 py-3 py-lg-5">
-      {cartItems.length > 0 ? (
+      {cartItems?.length > 0 ? (
         <>
           <div className="mt-4 text-center">
             <Headings
@@ -52,11 +52,11 @@ export default function CartItems() {
                   style={{ maxWidth: "700px" }}
                 >
                   <Link
-                    to={`/products/${item.category.toLowerCase()}/${item.slug}`}
+                    to={`/products/${item?.category?.toLowerCase()}/${item.slug}`}
                   >
                     <LazyLoadImage
                       effect="blur"
-                      src={item.image[0]}
+                      src={item?.image[0]}
                       alt={item.name}
                       width={130}
                       height={130}

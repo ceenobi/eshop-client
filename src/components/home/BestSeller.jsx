@@ -19,17 +19,18 @@ export default function BestSeller({ bestSellerProducts }) {
           {bestSellerProducts?.products?.map((item) => (
             <SwiperSlide
               key={item._id}
-              className="bg-white homeBox position-relative rounded-4 shadow-sm "
+              className="bg-white homeBox position-relative rounded-4"
             >
               <Link
                 to={`/products/${item.category.toLowerCase()}/${item.slug}`}
+                className="shadow-sm"
               >
                 <LazyLoadImage
                   effect="blur"
                   src={item.image[1]}
                   alt={item.name}
                   width={"100%"}
-                  height={450}
+                  height={550}
                   className="rounded-4 mb-0"
                 />
                 <div className="position-absolute top-0 p-4 text-start">
@@ -69,10 +70,10 @@ export default function BestSeller({ bestSellerProducts }) {
               src={item.image[1]}
               alt={item.name}
               width={300}
-              height={300}
+              height={450}
               className="w-100 h-100 rounded-4 mb-0"
             />
-            <div className="position-absolute bottom-0 p-4">
+            <div className="position-absolute top-0 p-4">
               <Texts
                 text={item.brand}
                 color="var(--bg-zinc-600)"

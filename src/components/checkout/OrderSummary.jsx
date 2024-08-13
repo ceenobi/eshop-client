@@ -11,12 +11,9 @@ import { toast } from "react-toastify";
 import Loader from "../Loader";
 import Texts from "../Texts";
 import ActionButton from "../ActionButton";
-// import ModalView from "../ModalView";
-// import Headings from "../Headings";
 
 export default function OrderSummary() {
   useTitle("Your order summary");
-  // const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
@@ -50,8 +47,6 @@ export default function OrderSummary() {
       token
     );
     if (status === 201) {
-      // setOrderId(data?.order._id);
-      // setShowModal(true);
       setCartItems([]);
       toast.success(data.msg);
       setDiscountCode(null);

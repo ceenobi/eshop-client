@@ -117,7 +117,7 @@ export default function ShowProduct({
 
             <ActionButton
               text={product.inStock ? "Add To Cart" : " Out of stock"}
-              onClick={() => addToCart(product?.data)}
+              onClick={() => addToCart(product)}
               className="w-100 border-0 py-2"
               style={{ backgroundColor: "var(--bg-blue-400" }}
               disabled={!product.inStock}

@@ -122,4 +122,7 @@ button:hover {
 .productImg {
   height: 380px;
 }
+.featuredProducts{
+  background-color: var(--bg-gray-100);
+}
 }

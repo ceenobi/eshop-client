@@ -38,7 +38,7 @@ export default function Login() {
   });
 
   return (
-    <AuthLayout caption="Login to your Footsy account">
+    <AuthLayout caption="Login to your Baggit account">
       <Form
         className={`${styles.form} mx-auto`}
         onSubmit={handleSubmit(onFormSubmit)}
