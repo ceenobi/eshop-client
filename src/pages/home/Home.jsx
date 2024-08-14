@@ -37,7 +37,7 @@ const links = [
 ];
 
 export default function Home() {
-  useTitle("Footsy Home");
+  useTitle("Home");
   const { data: cat, error: errCat } = useFetch(
     categoryService.getAllCategories
   );
@@ -95,7 +95,7 @@ export default function Home() {
           )}
         </div>
         <DisplayCategories categories={categories} />
-        
+
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text={

@@ -21,7 +21,7 @@ export default function RootLayout() {
               <>
                 Powered by{" "}
                 <a
-                  href="https://teemcommerce.netlify.app"
+                  href="https://teem-seller.vercel.app/"
                   style={{ color: "var(--bg-blue-400" }}
                   target="_blank"
                   rel="noopener noreferrer" // Added for security and performance
