@@ -52,12 +52,12 @@ export default function Drawer() {
                 to={`/products/${name.toLowerCase()}`}
                 className={classnames({
                   "profile d-flex flex-column fs-3 mb-4 text-black": true,
-                  "text-black fw-bold":
-                    location.pathname === `/products/${name.toLowerCase()}`,
                 })}
                 onClick={handleClose}
               >
-                {name}
+                {({ isActive }) => (
+                  <span className={isActive ? "fw-bold" : ""}> {name}</span>
+                )}
               </NavLink>
             ))}
           </div>
@@ -67,12 +67,12 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/profile/${loggedInUser?.username}`}
-                  className={`profile fs-4 d-flex align-items-center text-black w-100 ${
-                    location.pathname === "/profile" ? "fw-bold" : ""
-                  }`}
+                  className={`profile fs-4 d-flex align-items-center text-black w-100`}
                   onClick={handleClose}
                 >
-                  Profile
+                  {({ isActive }) => (
+                    <span className={isActive ? "fw-bold" : ""}>Profile</span>
+                  )}
                 </NavLink>
                 <GoPerson size="24px" />
               </div>
@@ -80,12 +80,12 @@ export default function Drawer() {
               <div className="d-flex justify-content-between align-items-center">
                 <NavLink
                   to={`/orders`}
-                  className={`profile fs-4 d-flex align-items-center text-black w-100 ${
-                    location.pathname === "/orders" ? "fw-bold" : ""
-                  }`}
+                  className={`profile fs-4 d-flex align-items-center text-black w-100`}
                   onClick={handleClose}
                 >
-                  Orders
+                  {({ isActive }) => (
+                    <span className={isActive ? "fw-bold" : ""}>Orders</span>
+                  )}
                 </NavLink>
                 <CiShoppingCart size="24px" />
               </div>

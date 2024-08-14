@@ -7,7 +7,7 @@ import { Navigation } from "swiper/modules";
 
 const FeaturedProducts = ({ featuredProducts }) => {
   return (
-    <div className="mt-4 featuredProducts py-5 px-lg-4 rounded-4">
+    <div className="py-3 px-lg-4 rounded-4">
       <Swiper
         navigation={true}
         modules={[Navigation]}
@@ -36,7 +36,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                 <Texts
                   text={item.brand}
                   color="var(--bg-zinc-600)"
-                  className="fw-bold text-uppercase"
+                  className="fw-bold text-uppercase mb-1"
                   size="16px"
                 />
                 <Texts
@@ -75,7 +75,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
               <Texts
                 text={item.brand}
                 color="var(--bg-zinc-600)"
-                className="fw-bold text-uppercase"
+                className="fw-bold text-uppercase mb-1"
                 size="16px"
               />
               <Texts

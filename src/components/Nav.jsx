@@ -1,5 +1,5 @@
 import { useStore } from "@/hooks";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classnames from "classnames";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { Badge, Container, Dropdown } from "react-bootstrap";
@@ -10,7 +10,6 @@ import Drawer from "./Drawer";
 
 export default function Nav() {
   const { categories, cartQuantity, loggedInUser, logout } = useStore();
-  const location = useLocation();
 
   return (
     <header>
@@ -32,12 +31,11 @@ export default function Nav() {
               to={`/products/${name.toLowerCase()}`}
               className={classnames({
                 "profile text-black small": true,
-                "text-danger fw-bold":
-                  location.pathname ===
-                  `/products/${name.toLowerCase().replace(/\s+/g, "")}`,
               })}
             >
-              {name}
+              {({ isActive }) => (
+                <span className={isActive ? "fw-bold" : ""}> {name}</span>
+              )}
             </NavLink>
           ))}
         </div>

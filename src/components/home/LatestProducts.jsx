@@ -7,7 +7,7 @@ import { Navigation } from "swiper/modules";
 
 export default function LatestProducts({ newProducts }) {
   return (
-    <div className="mt-4 py-5 px-lg-4">
+    <div className="py-3 px-lg-4">
       <Swiper
         navigation={true}
         modules={[Navigation]}
@@ -36,7 +36,7 @@ export default function LatestProducts({ newProducts }) {
                 <Texts
                   text={item.brand}
                   color="var(--bg-zinc-600)"
-                  className="fw-bold text-uppercase"
+                  className="fw-bold text-uppercase mb-1"
                   size="16px"
                 />
                 <Texts
@@ -75,7 +75,7 @@ export default function LatestProducts({ newProducts }) {
               <Texts
                 text={item.brand}
                 color="var(--bg-zinc-600)"
-                className="fw-bold text-uppercase"
+                className="fw-bold text-uppercase mb-1"
                 size="16px"
               />
               <Texts

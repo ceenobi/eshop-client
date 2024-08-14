@@ -41,7 +41,7 @@ const data = [
 export default function ShopWithUs() {
   return (
     <>
-      <Container className="p-0 px-md-3 mt-lg-4">
+      <Container className="p-0 px-md-3">
         <div
           className="d-flex align-items-center overflow-x-scroll overflow-y-hidden scrollbody"
           style={{ height: "250px" }}
