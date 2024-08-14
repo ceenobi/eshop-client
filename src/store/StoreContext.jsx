@@ -134,7 +134,7 @@ export const StoreProvider = ({ children }) => {
       () => {
         refreshUserToken();
       },
-      12 * 60 * 1000
+      5 * 60 * 1000
     );
     return () => clearInterval(interval);
   }, [refreshUserToken]);

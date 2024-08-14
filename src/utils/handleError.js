@@ -14,6 +14,7 @@ const handleError = (error) => {
       error.response.data?.message ||
         error.response.data?.error ||
         error.response.data?.errors[0]?.msg ||
+        error?.message ||
         "An error occured",
       {
         toastId: customId,

@@ -7,6 +7,7 @@ const getAllProducts = async (page = 1) => {
 const getNewProducts = async (page = 1) => {
   return await http.get(`/product/${merchantCode}/get/new?page=${page}`);
 };
+
 const getFeaturedProducts = async (page = 1) => {
   return await http.get(`/product/${merchantCode}/get/featured?page=${page}`);
 };

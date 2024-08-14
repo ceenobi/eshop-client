@@ -95,6 +95,7 @@ export default function Home() {
           )}
         </div>
         <DisplayCategories categories={categories} />
+        
         <div style={{ marginTop: "6rem" }}>
           <Headings
             text={

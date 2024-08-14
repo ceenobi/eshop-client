@@ -7,7 +7,7 @@ import { Navigation } from "swiper/modules";
 
 export default function BestSeller({ bestSellerProducts }) {
   return (
-    <div className="mt-4">
+    <div className="mt-4 py-5 px-lg-4">
       <>
         <Swiper
           navigation={true}
