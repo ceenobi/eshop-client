@@ -4,7 +4,7 @@ import { Offcanvas } from "react-bootstrap";
 import { IoMenu } from "react-icons/io5";
 import { GoPerson } from "react-icons/go";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import Texts from "./Texts";
 import classnames from "classnames";
@@ -12,7 +12,6 @@ import classnames from "classnames";
 export default function Drawer() {
   const [show, setShow] = useState(false);
   const { loggedInUser, logout, categories } = useStore();
-  const location = useLocation();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -36,12 +35,12 @@ export default function Drawer() {
             <div className="d-flex justify-content-between align-items-center">
               <NavLink
                 to="/products/search"
-                className={`profile fs-4 d-flex align-items-center text-black w-100 ${
-                  location.pathname === "/products/search" ? "fw-bold" : ""
-                }`}
+                className={`profile fs-4 d-flex align-items-center text-black w-100`}
                 onClick={handleClose}
               >
-                Search
+                {({ isActive }) => (
+                  <span className={isActive ? "fw-bold" : ""}>Search</span>
+                )}
               </NavLink>
               <CiSearch size="24px" />
             </div>
