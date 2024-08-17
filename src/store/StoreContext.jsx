@@ -92,22 +92,22 @@ export const StoreProvider = ({ children }) => {
   }, [setLoggedInUser, token]);
 
   const refreshUserToken = useCallback(async () => {
+    if (!loggedInUser?.username) return;
     try {
-      const refreshTokenResponse = await userService.getRefreshToken(
-        loggedInUser?._id
-      );
-      const accessTokenResponse = await userService.refreshToken({
-        refreshToken: refreshTokenResponse.data.refreshToken,
-      });
-      setToken(accessTokenResponse.data.accessToken);
+      const {
+        data: { refreshToken },
+      } = await userService.getRefreshToken(loggedInUser.username);
+      const {
+        data: { accessToken },
+      } = await userService.refreshToken({ refreshToken });
+      setToken(accessToken);
       getUser();
     } catch (error) {
       console.error(error);
-      setLoggedInUser(null);
       setToken(null);
       setStep(1);
     }
-  }, [loggedInUser?._id, setToken, getUser, setLoggedInUser, setStep]);
+  }, [loggedInUser.username, setToken, getUser, setStep]);
 
   const logout = useCallback(() => {
     if (!token) {
@@ -129,34 +129,33 @@ export const StoreProvider = ({ children }) => {
     }
   }, [getUser, loggedInUser]);
 
-  useEffect(() => {
-    const interval = setInterval(
-      () => {
-        refreshUserToken();
-      },
-      5 * 60 * 1000
-    );
-    return () => clearInterval(interval);
-  }, [refreshUserToken]);
+    useEffect(() => {
+      if (!token) return;
 
-  useEffect(() => {
-    const refresh = async () => {
-      try {
-        await refreshUserToken();
-      } catch (error) {
-        console.error(error);
-        setStep(1);
-      }
-    };
+      const refresh = async () => {
+        const tokenExp = new Date(jwtDecode(token).exp * 1000);
+        if (tokenExp - new Date() < 60 * 1000) {
+          try {
+            await refreshUserToken();
+          } catch (error) {
+            console.error(error);
+            setToken(null);
+            setStep(1)
+          }
+        }
+      };
 
-    if (token) {
-      const tokenExp = new Date(jwtDecode(token).exp * 1000);
-      const now = new Date();
-      if (tokenExp - now < 60 * 1000) {
-        refresh();
-      }
-    }
-  }, [refreshUserToken, setStep, token]);
+      const interval = setInterval(
+        () => {
+          refreshUserToken();
+          refresh();
+        },
+        13 * 60 * 1000
+      );
+
+      refresh();
+      return () => clearInterval(interval);
+    }, [refreshUserToken, setStep, setToken, token]);
 
   const generateOrder = {
     orderItems: cartItems,
