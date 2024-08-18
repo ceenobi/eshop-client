@@ -107,7 +107,7 @@ export const StoreProvider = ({ children }) => {
       setToken(null);
       setStep(1);
     }
-  }, [loggedInUser.username, setToken, getUser, setStep]);
+  }, [loggedInUser?.username, setToken, getUser, setStep]);
 
   const logout = useCallback(() => {
     if (!token) {
