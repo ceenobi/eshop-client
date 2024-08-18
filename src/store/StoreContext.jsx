@@ -1,6 +1,12 @@
 import { categoryService, userService } from "@/api";
 import { useFetch, usePersist } from "@/hooks";
-import { createContext, useCallback, useEffect, useMemo } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 
@@ -10,7 +16,7 @@ export const StoreProvider = ({ children }) => {
   const { data } = useFetch(categoryService.getAllCategories);
   const categories = useMemo(() => data, [data]);
   const [cartItems, setCartItems] = usePersist("cart", []);
-  const [loggedInUser, setLoggedInUser] = usePersist("clientLoggedIn", null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [token, setToken] = usePersist("clientToken", null);
   const [shippingDetails, setShippingDetails] = usePersist(
     "shippingDetails",
@@ -118,8 +124,10 @@ export const StoreProvider = ({ children }) => {
       setToken(null);
       setStep(1);
       setDiscountCode(null);
+      setShippingDetails(null)
+      setPaymentMethod(null)
     }
-  }, [setDiscountCode, setLoggedInUser, setStep, setToken, token]);
+  }, [setDiscountCode, setPaymentMethod, setShippingDetails, setStep, setToken, token]);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -129,33 +137,33 @@ export const StoreProvider = ({ children }) => {
     }
   }, [getUser, loggedInUser]);
 
-    useEffect(() => {
-      if (!token) return;
+  useEffect(() => {
+    if (!token) return;
 
-      const refresh = async () => {
-        const tokenExp = new Date(jwtDecode(token).exp * 1000);
-        if (tokenExp - new Date() < 60 * 1000) {
-          try {
-            await refreshUserToken();
-          } catch (error) {
-            console.error(error);
-            // setToken(null);
-            setStep(1)
-          }
+    const refresh = async () => {
+      const tokenExp = new Date(jwtDecode(token).exp * 1000);
+      if (tokenExp - new Date() < 60 * 1000) {
+        try {
+          await refreshUserToken();
+        } catch (error) {
+          console.error(error);
+          // setToken(null);
+          setStep(1);
         }
-      };
+      }
+    };
 
-      const interval = setInterval(
-        () => {
-          refreshUserToken();
-          refresh();
-        },
-        13 * 60 * 1000
-      );
+    const interval = setInterval(
+      () => {
+        refreshUserToken();
+        refresh();
+      },
+      13 * 60 * 1000
+    );
 
-      refresh();
-      return () => clearInterval(interval);
-    }, [refreshUserToken, setStep, setToken, token]);
+    refresh();
+    return () => clearInterval(interval);
+  }, [refreshUserToken, setStep, setToken, token]);
 
   const generateOrder = {
     orderItems: cartItems,
