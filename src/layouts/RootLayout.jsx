@@ -1,6 +1,6 @@
 import { Nav, Texts } from "@/components";
 import { Container } from "react-bootstrap";
-import { useOutlet } from "react-router-dom";
+import { ScrollRestoration, useOutlet } from "react-router-dom";
 
 export default function RootLayout() {
   const outlet = useOutlet();
@@ -9,7 +9,14 @@ export default function RootLayout() {
       <header>
         <Nav />
       </header>
-      <main style={{ minHeight: "85vh" }}>{outlet}</main>
+      <main style={{ minHeight: "85vh" }}>
+        {outlet}
+        <ScrollRestoration
+          getKey={(location) => {
+            return location.key;
+          }}
+        />
+      </main>
       <footer>
         <Container
           fluid="xl"

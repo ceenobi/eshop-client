@@ -99,6 +99,9 @@ export const StoreProvider = ({ children }) => {
 
   const refreshUserToken = useCallback(async () => {
     if (!loggedInUser?.username) return;
+     if (!isTokenValid(token)) {
+       setToken(null);
+     }
     try {
       const {
         data: { refreshToken },
@@ -113,7 +116,7 @@ export const StoreProvider = ({ children }) => {
       // setToken(null);
       setStep(1);
     }
-  }, [loggedInUser?.username, setToken, getUser, setStep]);
+  }, [loggedInUser?.username, token, setToken, getUser, setStep]);
 
   const logout = useCallback(() => {
     if (!token) {
