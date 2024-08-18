@@ -104,7 +104,7 @@ export const StoreProvider = ({ children }) => {
       getUser();
     } catch (error) {
       console.error(error);
-      setToken(null);
+      // setToken(null);
       setStep(1);
     }
   }, [loggedInUser?.username, setToken, getUser, setStep]);
@@ -139,7 +139,7 @@ export const StoreProvider = ({ children }) => {
             await refreshUserToken();
           } catch (error) {
             console.error(error);
-            setToken(null);
+            // setToken(null);
             setStep(1)
           }
         }
