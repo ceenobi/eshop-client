@@ -17,12 +17,13 @@ export const StoreProvider = ({ children }) => {
   const categories = useMemo(() => data, [data]);
   const [cartItems, setCartItems] = usePersist("cart", []);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [getUsername, setGetUsername] = usePersist("getUsername", null);
   const [token, setToken] = usePersist("clientToken", null);
   const [shippingDetails, setShippingDetails] = usePersist(
     "shippingDetails",
     {}
   );
-  const [step, setStep] = usePersist("step", 1);
+  const [step, setStep] = useState(1);
   const [paymentMethod, setPaymentMethod] = usePersist("paymentMethod", null);
   const [discountCode, setDiscountCode] = usePersist("discountCode", null);
 
@@ -92,20 +93,21 @@ export const StoreProvider = ({ children }) => {
     try {
       const { data } = await userService.authUser(token);
       setLoggedInUser(data);
+      setGetUsername(data.username);
     } catch (error) {
       console.error(error);
     }
-  }, [setLoggedInUser, token]);
+  }, [setLoggedInUser, setGetUsername, token]);
 
   const refreshUserToken = useCallback(async () => {
-    if (!loggedInUser?.username) return;
-     if (!isTokenValid(token)) {
-       setToken(null);
-     }
+    if (!getUsername) return;
+    if (!isTokenValid(token)) {
+      setToken(null);
+    }
     try {
       const {
         data: { refreshToken },
-      } = await userService.getRefreshToken(loggedInUser.username);
+      } = await userService.getRefreshToken(getUsername);
       const {
         data: { accessToken },
       } = await userService.refreshToken({ refreshToken });
@@ -116,7 +118,7 @@ export const StoreProvider = ({ children }) => {
       // setToken(null);
       setStep(1);
     }
-  }, [loggedInUser?.username, token, setToken, getUser, setStep]);
+  }, [getUsername, token, setToken, getUser, setStep]);
 
   const logout = useCallback(() => {
     if (!token) {
@@ -127,10 +129,19 @@ export const StoreProvider = ({ children }) => {
       setToken(null);
       setStep(1);
       setDiscountCode(null);
-      setShippingDetails(null)
-      setPaymentMethod(null)
+      setShippingDetails(null);
+      setPaymentMethod(null);
+      setGetUsername(null);
     }
-  }, [setDiscountCode, setPaymentMethod, setShippingDetails, setStep, setToken, token]);
+  }, [
+    setDiscountCode,
+    setGetUsername,
+    setPaymentMethod,
+    setShippingDetails,
+    setStep,
+    setToken,
+    token,
+  ]);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -161,7 +172,7 @@ export const StoreProvider = ({ children }) => {
         refreshUserToken();
         refresh();
       },
-      13 * 60 * 1000
+      12 * 60 * 1000
     );
 
     refresh();
